@@ -63,3 +63,5 @@ mark{background:rgba(124,240,200,.25);color:inherit;border-radius:3px}
 .term:target{outline:2px solid var(--accent2)}
 button.btn{border:0;cursor:pointer;font:inherit;font-weight:700}button.btn.ghost{border:1px solid var(--line)}
 @media print{.topbar,.btnrow,footer{display:none}body{background:#fff;color:#000}.qr{width:340px;height:340px}}
+[hidden]{display:none!important}
+.iostip{background:rgba(94,162,255,.12);border:1px solid var(--accent);border-radius:12px;padding:12px 16px;margin:14px 0}

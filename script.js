@@ -59,3 +59,14 @@ document.addEventListener('keydown',function(e){
  if(e.key==='Escape'){res.hidden=true;box.blur();}});
 document.addEventListener('click',function(e){if(!res.contains(e.target)&&e.target!==box)res.hidden=true;});
 })();
+/* iPhone/iPad: Safari has no install button, so show the manual steps */
+(function(){
+var ua=navigator.userAgent||'';
+var ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var standalone=window.navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
+var anchor=document.querySelector('[data-install]');
+if(!anchor||standalone)return;
+if(ios){var d=document.createElement('div');d.className='iostip';
+ d.innerHTML='<strong>On iPhone or iPad:</strong> there is no install button. Tap the <strong>Share</strong> icon in Safari (square with an arrow), then <strong>Add to Home Screen</strong>, then <strong>Add</strong>.';
+ anchor.parentNode.insertBefore(d,anchor);}
+})();

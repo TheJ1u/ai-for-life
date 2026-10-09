@@ -42,3 +42,19 @@ Not ready to edit? [Open an issue](https://github.com/TheJ1u/ai-for-life/issues/
 ## If something goes wrong
 
 Every change is saved and can be undone. A mistake in a pull request is fixed by editing it, and a mistake that was already merged can be reverted with one click.
+
+## Using Claude or another AI to help
+
+This repo includes instructions that AI assistants read automatically (`CLAUDE.md` and `AGENTS.md`), so you can get help from one even as a beginner.
+
+**With Claude Code (or a similar tool on your computer):**
+1. Fork the repo, then clone your fork (or ask the AI to do it for you).
+2. Open the folder in Claude Code. It reads `CLAUDE.md` on its own.
+3. Say what you want, for example: `I want to add a guide for [tool] to the club site. Walk me through it.`
+4. When it is done, ask it to commit and help you open a pull request.
+
+**With Claude or ChatGPT in the browser:** connect your GitHub account in the app's settings, or paste the contents of `CLAUDE.md` into the chat, then describe what you want to add. Copy the result into the file on GitHub (pencil icon), commit, and open a pull request.
+
+Whichever you use, read what it wrote before you submit it. AI can state wrong facts with confidence, so check anything about pricing or features on the tool's official site.
+
+After editing, run `python3 scripts/update_site.py` (or ask your AI to). It refreshes the site search and catches broken links.

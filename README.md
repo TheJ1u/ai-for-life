@@ -56,4 +56,4 @@ The QR code points to `https://thej1u.github.io/ai-for-life/`. If you move to a 
 
 ## Contributing
 
-Everyone in the club is welcome to add to this site. See [CONTRIBUTING.md](CONTRIBUTING.md) for the step-by-step guide, or open an issue with an idea.
+Everyone in the club is welcome to add to this site. See [CONTRIBUTING.md](CONTRIBUTING.md) for the step-by-step guide, or open an issue with an idea. If you use Claude Code or another AI assistant, it will read [CLAUDE.md](CLAUDE.md) and guide you through adding things.

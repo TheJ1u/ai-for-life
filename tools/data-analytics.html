@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beginner data analytics | AI For Life</title>
+<meta name="description" content="Beginner data analytics — beginner resources and checked sources.">
+<link rel="stylesheet" href="../style.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b0d12">
+<link rel="icon" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI For Life">
+<meta property="og:title" content="Beginner data analytics | AI For Life">
+<meta property="og:description" content="Beginner data analytics — beginner resources and checked sources.">
+<meta property="og:url" content="https://thej1u.github.io/ai-for-life/tools/data-analytics.html">
+<meta property="og:image" content="https://thej1u.github.io/ai-for-life/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://thej1u.github.io/ai-for-life/tools/data-analytics.html">
+</head>
+<body data-root="../">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="topbar"><a class="brand" href="../index.html">AI For Life</a><button class="btn nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button><nav id="site-nav" aria-label="Main navigation"><a href="../clubs.html">BYU clubs</a><a href="../start.html">Start here</a><a href="../index.html#tools">Tools</a><a href="../meetings.html">Meetings</a><a href="../prompts.html">Prompts</a><a href="../showcase.html">Showcase</a><a href="../glossary.html">Glossary</a><a href="../share.html">Share</a></nav><button class="btn install-top" type="button" data-install hidden>Install app</button><div class="search-wrap"><input id="site-search" class="sitesearch" type="search" placeholder="Search the site ( / )" aria-label="Search the whole site" aria-controls="results" aria-describedby="search-status" autocomplete="off"><p id="search-status" class="sr-only" role="status"></p><div id="results" class="results" aria-label="Search results" hidden></div></div></header>
+<main id="main-content" tabindex="-1" class="wrap article"><p class="crumb"><a href="../index.html#tools">← All tools</a></p><span class="tag">Data analytics</span><h1>Check the numbers before the story</h1><p class="lede">Use six synthetic rows to catch duplicates, missing prices, and conclusions the data cannot support. These are invented practice orders, not club or business results.</p><h2>What it is</h2><p>Data analytics turns records into evidence for a decision. Cleaning means identifying errors and deciding how to handle them before calculating totals.</p><h2>How to get started</h2><p>Use any of our <a href="chatgpt.html">ChatGPT</a>, <a href="claude.html">Claude</a>, or <a href="gemini.html">Gemini</a> guides. Basic text chat is enough; paid uploads are optional. <a href="../assets/practice-orders.csv">Download the synthetic CSV</a> or copy it below.</p><div class="code"><button type="button" class="copy" data-copy>Copy</button><pre>order_id,item,units,unit_price
+A101,Notebook,2,5
+A102,Pen,3,2
+A103,Notebook,1,5
+A103,Notebook,1,5
+A104,Pen,-2,2
+A105,Folder,4,
+</pre></div><h2>Try this</h2><div class="code"><button type="button" class="copy" data-copy>Copy</button><pre>Analyze the synthetic CSV above. First identify duplicate IDs, negative quantities, and missing prices. Do not silently change them. Exclude ambiguous rows A104 and A105 from a provisional total; count A103 once. Show each included line total, total units, revenue, and exclusions. Explain why this sample cannot establish profit, demand, or a trend.</pre></div><h2 id="walkthrough">Full walkthrough</h2><ol class="steps"><li>Count six input rows. A103 appears twice with identical values; confirm duplication before removing records in real work.</li><li>Flag A104: a negative quantity might be a return or an error. Ask the data owner. A105 has no price; never treat missing as zero.</li><li>For this exercise only, count A101, A102 and A103 once. Exclude A104 and A105 pending clarification.</li><li>Calculate independently: 2 × $5 = $10; 3 × $2 = $6; 1 × $5 = $5. Total: 6 units and $21 across 3 orders.</li><li>Compare the AI answer line by line. A $26 total likely counted A103 twice. Save both original and cleaned data with an explanation of every change.</li></ol><h3>Check your work</h3><p>There are 3 included rows and 3 excluded rows (one duplicate and two unresolved records). Revenue is not profit: costs are missing. No dates or representative sample exist, so do not claim growth or forecast demand.</p><h3>Common problems</h3><p>If the AI fills a missing price, tell it to keep the value unknown. If it treats the negative quantity as an error, ask what evidence would distinguish a return. Do not accept a chart until its totals reconcile with your calculation.</p><h2>Business use case</h2><p>A retailer checks an export before ordering inventory. A person resolves exceptions with the source system, compares verified totals, and approves the report. Measure correction rates and review time; one mistaken inventory order can outweigh the time saved. Keep customer data out of public AI tools.</p><h2>What to learn next</h2><p>Repeat with a new synthetic row and predict the correct total before asking AI. See <a href="../safe-ai.html">Using AI safely</a> and the linked assistant guides for official product instructions and plan details, checked October 9, 2026.</p></main>
+<footer><p class="foot-links"><a href="#" data-install-link>Install the app</a> · <a href="../roadmap.html">Roadmap</a> · <a href="../industries.html">By industry</a> · <a href="../automate.html">News watch</a> · <a href="../board.html">Board</a> · <a href="../contributors.html">Contributors</a> · <a href="../share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
+<script src="../script.js"></script>
+</body>
+</html>

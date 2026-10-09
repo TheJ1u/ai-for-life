@@ -12,7 +12,9 @@ A student-run club guide to practical AI: tool walkthroughs with business use ca
 
 ## What is inside
 
-- **Tool guides with full walkthroughs:** FLUX 3, Higgsfield, CapCut, Google AI Edge Eloquent, Hugging Face, GitHub, Muse, and building your own model.
+- **Tool guides with full walkthroughs:** ChatGPT, Claude, Gemini, beginner data analytics, FLUX 3, Higgsfield, CapCut, Google AI Edge Eloquent, Hugging Face, GitHub, Muse, and building your own model.
+- **BYU clubs directory:** interest filters, source links, verification dates and clearly marked unverified channels.
+- **Student benefits:** official eligibility, deadlines and renewal terms checked October 9, 2026.
 - **Scheduled news watch:** make AI check the news for you.
 - **AI by industry:** IT/IS, analysis, marketing, finance, accounting, construction, insurance and more.
 - **Safe AI checklist, cost calculator, roadmap board.**
@@ -34,6 +36,64 @@ Code and text: [MIT](LICENSE). The header video and some images were made or sha
 ---
 
 ## Details for developers
+
+### Meeting and join information
+
+AI For Life is for the BYU community only. Edit `meetings.json`, then run
+`python3 scripts/update_site.py`. This generates the join panels, meeting details
+and `assets/ai-for-life-weekly.ics`; do not edit those generated sections by hand.
+The standing schedule remains Thursdays, 4–5 PM America/Denver at BYU.
+
+Only organizer-confirmed dates in `events` appear in the next-meeting banner or
+calendar. This prevents the site from inventing meetings during breaks. Start
+with an empty list until dates are confirmed. Each event needs a stable `id`,
+ISO `start`, `end` and `updated` timestamps with explicit Mountain offsets,
+plus `topic` and `location`. Use `-06:00` during daylight time and `-07:00`
+during standard time; check the actual date. Exceptions use their actual time.
+To cancel, add an entry with the same `id` and a public `reason` to
+`cancellations`. Keep the cancellation visible. Calendar imports are snapshots,
+so attendees must remove cancelled copies themselves and check the site before
+traveling. There is deliberately no indefinite recurring calendar event.
+
+The join URL, building, room, map, topic and confirmed dates remain pending.
+No fake join action or calendar invitation is published. Fill `joinUrl` with the
+real signup/chat destination to enable the prominent join action on both pages.
+Meeting JSON bypasses the offline cache; cached pages cannot confirm a next date.
+
+### Content maintenance
+
+Recheck directory sources and student-offer terms before each term and before
+the listed promotion deadlines. Update each entry's checked date only after
+reviewing its official sources. Instagram retrieval failures are labelled;
+they are not treated as verified accounts. Existing member credit and meeting
+notes remain intact. Submit real notes or projects with permission and source
+links; never turn a practice exercise into a claimed club result.
+
+### Checks before a pull request
+
+```sh
+python3 -m unittest discover -s scripts -p 'test_*.py'
+python3 scripts/update_site.py
+node --check script.js
+node --check sw.js
+node --test scripts/test_sw.cjs
+python3 -m http.server 8000
+```
+
+Python and Node checks use only their standard libraries. Node is used for
+checks, not a site build or runtime dependency. GitHub Actions runs these checks
+on pull requests. The checker resolves local links, URL fragments, image/video
+sources and posters, duplicate IDs and nested links. It ignores HTML comments.
+Search and sitemap generation use portable URL paths on Windows and Linux.
+
+Preview at desktop and 320px width. Check the mobile menu, skip link, keyboard
+search and Escape, copy buttons, club filters, video pause, reduced motion,
+and the install dialog's Tab loop and focus return. Verify meeting exceptions
+using synthetic fixtures, not published fake meetings. Check the console.
+For offline testing, first visit a page, disconnect, then revisit it and an
+uncached page; the latter must show an offline response, not a broken fetch.
+Increase the service-worker cache version when changing cached assets; activation
+removes only older caches belonging to this site.
 
 A beginner-friendly guide to the AI tools we talk about in the **AI For Life** club, plus a glossary of the tech and business words you will hear.
 

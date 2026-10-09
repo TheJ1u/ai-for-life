@@ -16,6 +16,11 @@ A beginner-friendly guide to the AI tools we talk about in the **AI For Life** c
 | `tools/google-ai-edge-eloquent.html` | Google AI Edge Eloquent (free dictation app) |
 | `tools/hugging-face.html` | Hugging Face (open model hub) |
 | `tools/github.html` | GitHub (store, share and publish projects) |
+| `start.html` | Start here: what the club is, how to join in, FAQ |
+| `meetings.html` | Weekly meeting time, calendar invite and meeting log |
+| `prompts.html` | Copy-and-paste prompt library |
+| `showcase.html` | Member projects |
+| `templates/tool-template.html` | Copy this to write a new tool guide |
 | `tools/capcut.html` | CapCut (video editing) |
 | `tools/build-your-own-model.html` | A path to fine-tuning and publishing your own model |
 | `glossary.html` | Searchable notes: API, CLI, MCP, CEO, CIO, CCO and more |
@@ -48,3 +53,7 @@ Tools and prices change quickly. Confirm details on each official site. Do not c
 ## Regenerating the QR code and search index
 
 The QR code points to `https://thej1u.github.io/ai-for-life/`. If you move to a custom domain, make a new QR code for the new address and replace `assets/qr.png` and `assets/qr.svg`. Whenever you add or edit pages, the search index (`search-index.json`) needs to be rebuilt too.
+
+## Contributing
+
+Everyone in the club is welcome to add to this site. See [CONTRIBUTING.md](CONTRIBUTING.md) for the step-by-step guide, or open an issue with an idea.

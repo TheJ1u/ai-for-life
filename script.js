@@ -92,3 +92,35 @@ btns.forEach(function(b){b.hidden=false;b.addEventListener('click',function(){
  else open();});});
 })();
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-install-link]');if(a){e.preventDefault();var b=document.querySelector('button[data-install]');if(b)b.click();}});
+
+/* ---- next meeting banner: every Thursday 4:00 to 5:00 PM Mountain ---- */
+(function(){
+var els=document.querySelectorAll('[data-nextmeeting] .nm');if(!els.length)return;
+try{
+ var f=new Intl.DateTimeFormat('en-US',{timeZone:'America/Denver',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',hour12:false,weekday:'short'});
+ var parts={};f.formatToParts(new Date()).forEach(function(p){parts[p.type]=p.value;});
+ var dow={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[parts.weekday];
+ var hour=parseInt(parts.hour,10)%24,min=parseInt(parts.minute,10);
+ var ahead=(4-dow+7)%7;
+ var live=dow===4&&(hour>=16&&hour<17);
+ if(dow===4&&hour>=17)ahead=7;
+ var d=new Date(Date.UTC(+parts.year,+parts.month-1,+parts.day+ahead,12));
+ var label=d.toLocaleDateString('en-US',{timeZone:'UTC',weekday:'long',month:'long',day:'numeric'});
+ var txt=live?'Happening now, until 5:00 PM at BYU':(ahead===0?'Today':label)+', 4:00 PM at BYU';
+ els.forEach(function(e){e.textContent=txt;});
+}catch(e){}
+})();
+
+/* ---- prompt library filter ---- */
+(function(){
+var grid=document.getElementById('pgrid');if(!grid)return;
+var q=document.getElementById('pq'),none=document.getElementById('pnone'),cat='all';
+function run(){var t=q.value.trim().toLowerCase(),n=0;
+ grid.querySelectorAll('.pcard').forEach(function(c){
+  var ok=(cat==='all'||c.getAttribute('data-cat')===cat)&&(!t||(c.getAttribute('data-search')||c.textContent.toLowerCase()).indexOf(t)>-1);
+  c.hidden=!ok;if(ok)n++;});
+ none.hidden=n>0;}
+q.addEventListener('input',run);
+document.getElementById('chips').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;
+ document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on')});b.classList.add('on');cat=b.getAttribute('data-c');run();});
+})();

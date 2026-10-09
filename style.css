@@ -70,3 +70,21 @@ button.btn{border:0;cursor:pointer;font:inherit;font-weight:700}button.btn.ghost
 .modalbox h3{margin:0 0 10px}.modalbox ol{padding-left:20px}.modalbox li{margin:8px 0}
 .modalbox .x{position:absolute;top:8px;right:12px;background:none;border:0;color:var(--muted);font-size:28px;cursor:pointer;line-height:1}
 .install-top{padding:6px 14px;font-size:14px}
+
+.banner{background:rgba(124,240,200,.1);border:1px solid rgba(124,240,200,.35);border-radius:12px;padding:12px 16px;margin:18px 0}
+.banner a{margin-left:10px}
+.meeting,.project,.pcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:12px 0}
+.meeting.open{border-style:dashed}.meeting h3,.project h3,.pcard h3{margin:6px 0}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:16px}.pgrid .pcard,.pgrid .project{margin:0}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.chip{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}
+.chip.on{background:var(--accent);color:#06101f;border-color:var(--accent);font-weight:700}
+.faq details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0}
+.faq summary{cursor:pointer;font-weight:700}.faq details p{margin:10px 0 2px}
+code{background:#0e1219;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:.92em}
+
+.usecase{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:12px;padding:6px 18px;margin:10px 0}
+.card .biz{font-size:14px;color:var(--muted);margin:8px 0}.card .biz strong{color:var(--accent2)}
+.group{margin:26px 0 8px}.gh{font-size:21px;margin:0 0 2px}
+.card.empty{border-style:dashed;background:transparent}
+a.chip{text-decoration:none;display:inline-block}

@@ -121,3 +121,5 @@ label.inline input{display:inline-block;width:auto;min-width:240px;margin-left:8
 .rb-out .code{margin:12px 0}.rb-out h3{margin:16px 0 4px;font-size:16px}
 .vf{padding-left:20px}.vf li{margin:6px 0}
 .chips.static .chip{cursor:default}
+
+.demo{margin:8px 0 18px}.demo video{width:100%;border-radius:12px;border:1px solid var(--line);background:#000;display:block}.demo figcaption{font-size:14px;color:var(--muted);margin-top:8px}

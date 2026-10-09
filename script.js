@@ -124,3 +124,86 @@ q.addEventListener('input',run);
 document.getElementById('chips').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;
  document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on')});b.classList.add('on');cat=b.getAttribute('data-c');run();});
 })();
+
+/* ---- safe-ai checker ---- */
+(function(){
+var sel=document.getElementById('sa-select'),out=document.getElementById('sa-result');if(!sel||!out)return;
+var R={
+public:['green','Generally fine','Public information is low risk. Still check the tool\'s settings, and verify any facts the AI gives back.'],
+own:['green','Fine, with a quick check','Your own ideas and drafts are usually fine. Check whether the tool keeps or trains on your chats, and avoid pasting anything you would not want stored.'],
+internal:['yellow','Be careful','Pricing, plans and strategy can hurt you if they leak. Use a plan or tool your company approves, or remove names and numbers first.'],
+copyright:['yellow','Summarize, do not copy','Pasting whole paid or copyrighted works can break the rules. Summarize in your own words, or ask the AI about public excerpts and link to the source.'],
+client:['red','Avoid unless approved','Client and customer details are private. Do not paste them into a general AI tool. Replace names and contact details with placeholders, or use only a tool your organization has approved for client data.'],
+health:['red','Do not paste it','Health information is highly sensitive and often legally protected. Keep it out of general AI tools. Use anonymous, made-up examples instead, and follow your organization\'s privacy rules.'],
+money:['red','Never paste it','Account numbers and ID numbers (such as a Social Security number) should never go into an AI tool. If you pasted one by mistake, contact the affected person and your organization\'s security contact.'],
+secret:['red','Never paste it','Passwords, API keys and tokens give access to your accounts. Never share them with an AI or put them in a public repo. If one leaked, change it immediately.'],
+face:['yellow','Get permission first','Do not recreate a real person\'s face or voice without their permission. Do not present AI-made media as real, and follow each platform\'s labeling rules.']
+};
+sel.addEventListener('change',function(){var r=R[sel.value];if(!r){out.hidden=true;return;}
+ out.className='sa-result '+r[0];out.innerHTML='<h3></h3><p></p>';out.querySelector('h3').textContent=r[1];out.querySelector('p').textContent=r[2];out.hidden=false;});
+})();
+
+/* ---- cost calculator ---- */
+(function(){
+var form=document.getElementById('calc');if(!form)return;
+var D={videos:8,rate:30,paid:300,hrsnow:2,tool:40,extra:0,hrsai:3},ids=Object.keys(D),el={};
+ids.forEach(function(i){el[i]=document.getElementById(i);});
+function num(i){var v=parseFloat(el[i].value);return isFinite(v)&&v>=0?v:0;}
+function $(n){return (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');}
+function setv(o){ids.forEach(function(i){el[i].value=(o&&o[i]!=null)?o[i]:D[i];});}
+var q={};try{new URLSearchParams(location.search).forEach(function(v,k){if(D.hasOwnProperty(k)&&isFinite(parseFloat(v)))q[k]=Math.max(0,parseFloat(v));});}catch(e){}
+setv(q);
+function t(id,v){document.getElementById(id).textContent=v;}
+function run(){
+ var v=num('videos'),r=num('rate'),paid=num('paid'),hn=num('hrsnow'),tool=num('tool'),ex=num('extra'),ha=num('hrsai');
+ var nowPer=paid+hn*r,aiPer=ex+ha*r,now=v*nowPer,ai=tool+v*aiPer,save=now-ai;
+ t('o-now',$(now));t('o-ai',$(ai));t('o-save',$(save));t('o-year',$(save*12));
+ var m=Math.max(now,ai,1);document.getElementById('b-now').style.width=(now/m*100)+'%';document.getElementById('b-ai').style.width=(ai/m*100)+'%';
+ var msg='';
+ if(v===0){msg='Enter how many videos you make per month.';}
+ else{
+  var gap=nowPer-aiPer;
+  if(gap>0){var be=tool/gap;msg='Break-even: AI costs less once you make about '+(be<1?'1':Math.ceil(be))+' video'+(Math.ceil(be)===1||be<1?'':'s')+' a month. ';}
+  else{msg='With these numbers, each AI video costs as much as or more than your current way, so the subscription does not pay off. ';}
+  if(r>0){var mh=(nowPer-ex-tool/v)/r;if(mh>0)msg+='AI stays cheaper as long as a video takes you under '+(Math.round(mh*10)/10)+' hours.';}
+ }
+ t('o-text',msg);
+ try{var p=new URLSearchParams();ids.forEach(function(i){p.set(i,num(i));});history.replaceState(null,'','?'+p.toString());}catch(e){}
+}
+ids.forEach(function(i){el[i].addEventListener('input',run);});
+document.getElementById('calc-reset').addEventListener('click',function(){setv(null);run();});
+document.getElementById('calc-copy').addEventListener('click',function(e){var b=e.target,o=b.textContent;
+ (navigator.clipboard?navigator.clipboard.writeText(location.href):Promise.reject()).then(function(){b.textContent='Copied'}).catch(function(){b.textContent='Copy the address bar'});setTimeout(function(){b.textContent=o},1600);});
+run();
+})();
+
+/* ---- resume bullet builder + proof links ---- */
+(function(){
+var out=document.getElementById('rb-out');
+function g(i){var e=document.getElementById(i);return e?e.value.trim():'';}
+function block(title,text){var d=document.createElement('div');var h=document.createElement('h3');h.textContent=title;d.appendChild(h);
+ var c=document.createElement('div');c.className='code';var b=document.createElement('button');b.className='copy';b.type='button';b.textContent='Copy';
+ var pre=document.createElement('pre');pre.textContent=text;b.addEventListener('click',function(){(navigator.clipboard?navigator.clipboard.writeText(text):Promise.reject()).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)}).catch(function(){});});
+ c.appendChild(b);c.appendChild(pre);d.appendChild(c);return d;}
+function build(){
+ if(!out)return;out.innerHTML='';
+ var lv=g('rb-level'),what=g('rb-what'),topic=g('rb-topic'),link=g('rb-link'),res=g('rb-result'),ai=g('rb-ai')==='yes';
+ if(!what){var p=document.createElement('p');p.className='note';p.textContent='Fill in "What you added" to see your bullets.';out.appendChild(p);return;}
+ var aiTxt=ai?' with AI assistance':'';
+ var proof=link?' ('+link+')':'';
+ var resTxt=res?'; '+res:'';
+ var role=lv==='Maintainer'?'Maintain and review contributions to':'Contributed to';
+ out.appendChild(block('Resume bullet (short)',role+' AI For Life, a student-run club knowledge site on GitHub Pages: added '+what+(topic?' covering '+topic:'')+aiTxt+' through a reviewed pull request'+resTxt+proof+'.'));
+ out.appendChild(block('Resume bullet (skills focus)','Wrote beginner-friendly documentation'+(topic?' on '+topic:'')+' and submitted it via Git and GitHub pull requests, practicing code review and open-source collaboration'+aiTxt+proof+'.'));
+ out.appendChild(block('LinkedIn project description','AI For Life Club Website. A shared learning site for our AI club. I '+(lv==='Maintainer'?'help review and merge contributions and ':'')+'added '+what+(topic?' about '+topic:'')+aiTxt+'. Skills: GitHub, pull requests, technical writing'+(topic?', '+topic:'')+'.'+(res?' '+res.charAt(0).toUpperCase()+res.slice(1)+'.':'')+(link?' Proof: '+link:'')));
+}
+['rb-level','rb-what','rb-topic','rb-link','rb-result','rb-ai'].forEach(function(i){var e=document.getElementById(i);if(e){e.addEventListener('input',build);e.addEventListener('change',build);}});
+build();
+var u=document.getElementById('vf-user'),vo=document.getElementById('vf-out');
+if(u&&vo)u.addEventListener('input',function(){
+ var n=u.value.trim().replace(/[^A-Za-z0-9-]/g,'');vo.innerHTML='';if(!n)return;
+ var R='https://github.com/TheJ1u/ai-for-life';
+ [['Your pull requests to this site',R+'/pulls?q=is%3Apr+author%3A'+n],['Your commits to this site',R+'/commits?author='+n],['Your GitHub profile','https://github.com/'+n]].forEach(function(x){
+  var li=document.createElement('li'),a=document.createElement('a');a.href=x[1];a.target='_blank';a.rel='noopener';a.textContent=x[0]+' ↗';li.appendChild(a);vo.appendChild(li);});
+});
+})();

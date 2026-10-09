@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contributors | AI For Life</title>
+<meta name="description" content="Credit for club members who add to this site, with a resume bullet builder and links employers can verify.">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0b0d12">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI For Life">
+<meta property="og:title" content="Contributors | AI For Life">
+<meta property="og:description" content="Credit for club members who add to this site, with a resume bullet builder and links employers can verify.">
+<meta property="og:url" content="https://thej1u.github.io/ai-for-life/contributors.html">
+<meta property="og:image" content="https://thej1u.github.io/ai-for-life/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://thej1u.github.io/ai-for-life/contributors.html">
+</head>
+<body data-root="">
+<header class="topbar"><a class="brand" href="index.html">AI For Life</a><nav><a href="start.html">Start here</a><a href="index.html#tools">Tools</a><a href="meetings.html">Meetings</a><a href="prompts.html">Prompts</a><a href="showcase.html">Showcase</a><a href="glossary.html">Glossary</a><a href="share.html">Share</a></nav><button class="btn install-top" type="button" data-install hidden>Install app</button><div class="search-wrap"><input id="site-search" class="sitesearch" type="search" placeholder="Search the site ( / )" aria-label="Search the whole site" autocomplete="off"><div id="results" class="results" hidden></div></div></header>
+<main class="wrap article">
+<span class="tag">Contributors</span><h1>Contributors and resume proof</h1>
+<p class="lede">Everyone who adds to this site gets credit that employers can check for themselves.</p>
+
+<h2>Why this works as resume proof</h2>
+<p>A line on a resume is a claim. A merged pull request is evidence. Every change to this site is recorded on GitHub with your name, the date, exactly what you changed, and who approved it. Anyone can open the link and see it. That is much stronger than "member of a club."</p>
+
+<h2>How to get credit, step by step</h2>
+<ol class="steps">
+<li><strong>Use your own GitHub account</strong> (free) and make your profile look professional: a real name or clear username, and a short bio.</li>
+<li><strong>Make your change as a pull request</strong>, as described on the <a href="start.html">Start here</a> page. Edits made on the GitHub website are automatically credited to your account.</li>
+<li><strong>Add yourself to the table below</strong> in the same pull request, with a link to your work. You can use your GitHub handle only, or add your name if you want.</li>
+<li><strong>Once it is merged</strong>, copy the link to your pull request. It never expires.</li>
+<li><strong>Use the builder below</strong> to write your resume bullets and LinkedIn entry.</li>
+<li><strong>Be honest about AI help.</strong> If an AI assistant helped, say "with AI assistance." Employers respect that, and they dislike overclaiming.</li>
+</ol>
+
+<h2>Contributor levels</h2>
+<div class="grid3">
+<div class="mini"><h3>Contributor</h3><p>At least one merged pull request, such as a prompt, a meeting note, a glossary word or a fix.</p></div>
+<div class="mini"><h3>Guide author</h3><p>Wrote or substantially improved a full tool guide, including its business use case.</p></div>
+<div class="mini"><h3>Maintainer</h3><p>Reviews and merges pull requests, and keeps the site accurate.</p></div>
+</div>
+<p class="note">These are club labels, not job titles. Describe your work in your own words and only claim what you did.</p>
+
+<h2>Contribution log</h2>
+<div class="tablewrap"><table class="clog">
+<thead><tr><th>GitHub handle</th><th>Level</th><th>What they added</th><th>Proof</th></tr></thead>
+<tbody>
+<tr><td><a href="https://github.com/TheJ1u" target="_blank" rel="noopener">@TheJ1u</a></td><td>Maintainer</td><td>Founded the site and the contribution process; wrote the first tool guides, glossary and roadmap</td><td><a href="https://github.com/TheJ1u/ai-for-life/commits/main" target="_blank" rel="noopener">Commit history ↗</a></td></tr>
+<tr><td>Brunson Smith</td><td>Credited</td><td>Made the header video with FLUX 3 and shared it with the club</td><td><a href="index.html">Home page</a></td></tr>
+<!-- Add new contributors ABOVE this line. Copy a row and fill it in. -->
+</tbody></table></div>
+<p class="note">Your row is added by pull request. Copy a row above, put it just above the comment, and fill in your handle, level, what you added and a link to your pull request.</p>
+
+<h2>Resume bullet builder</h2>
+<p>Fill in what you actually did. The builder only rearranges your own words, so check every line before you use it.</p>
+<form id="rb" class="calc" onsubmit="return false">
+<div class="calcgrid">
+<fieldset><legend>Your contribution</legend>
+<label>Your level<select id="rb-level"><option>Contributor</option><option>Guide author</option><option>Maintainer</option></select></label>
+<label>What you added (example: a prompt library entry for video scripts)<input id="rb-what" type="text" placeholder="a guide to ..."></label>
+<label>Topic or tool (example: Hugging Face)<input id="rb-topic" type="text" placeholder="tool or topic"></label>
+</fieldset>
+<fieldset><legend>Proof and results</legend>
+<label>Link to your pull request<input id="rb-link" type="url" placeholder="https://github.com/TheJ1u/ai-for-life/pull/..."></label>
+<label>A real result, if you have one (example: used in 3 meetings)<input id="rb-result" type="text" placeholder="optional, only if true"></label>
+<label>Used AI assistance?<select id="rb-ai"><option value="yes">Yes</option><option value="no">No</option></select></label>
+</fieldset>
+</div>
+</form>
+<div id="rb-out" class="rb-out"></div>
+
+<h2>Show the proof</h2>
+<p>Enter your GitHub username to get links an employer can open.</p>
+<label class="inline">GitHub username <input id="vf-user" type="text" placeholder="yourname" autocomplete="off"></label>
+<ul id="vf-out" class="vf"></ul>
+
+<h2>Skills you can list (only what you did)</h2>
+<div class="chips static"><span class="chip">Git and GitHub</span><span class="chip">Pull requests and code review</span><span class="chip">HTML</span><span class="chip">Technical writing</span><span class="chip">Prompt writing</span><span class="chip">AI tools</span><span class="chip">Open-source collaboration</span><span class="chip">Documentation</span></div>
+
+<h2>Ask the maintainer to confirm</h2>
+<p>If an employer wants more than a link, the maintainer can write a short note. Copy this and fill it in.</p>
+<div class="code"><button class="copy" data-copy>Copy</button><pre>I confirm that [Full name] (GitHub: @[username]) contributed [what they added] to the AI For Life club website (https://github.com/TheJ1u/ai-for-life) on [date]. The work was reviewed and merged through a pull request. [Maintainer name, contact]</pre></div>
+
+<h2>Add your own work to the site</h2>
+<p>Not sure what to contribute? Check the <a href="board.html">roadmap board</a>, the <a href="prompts.html">prompt library</a>, or <a href="meetings.html">meeting notes</a>. Every small, correct addition counts.</p>
+</main>
+<footer><p class="foot-links"><a href="#" data-install-link>Install the app</a> · <a href="roadmap.html">Roadmap</a> · <a href="board.html">Board</a> · <a href="contributors.html">Contributors</a> · <a href="share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
+<script src="script.js"></script>
+</body>
+</html>

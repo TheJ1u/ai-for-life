@@ -20,6 +20,11 @@ A beginner-friendly guide to the AI tools we talk about in the **AI For Life** c
 | `meetings.html` | Weekly meeting time, calendar invite and meeting log |
 | `prompts.html` | Copy-and-paste prompt library |
 | `showcase.html` | Member projects |
+| `safe-ai.html` | Checklist for using AI safely at work and school |
+| `calculator.html` | AI video cost calculator |
+| `board.html` | Club roadmap board |
+| `contributors.html` | Contribution log and resume guide |
+| `404.html`, `sitemap.xml`, `robots.txt` | Missing-page screen and search-engine files |
 | `templates/tool-template.html` | Copy this to write a new tool guide |
 | `tools/capcut.html` | CapCut (video editing) |
 | `tools/build-your-own-model.html` | A path to fine-tuning and publishing your own model |

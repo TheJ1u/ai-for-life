@@ -58,3 +58,7 @@ This repo includes instructions that AI assistants read automatically (`CLAUDE.m
 Whichever you use, read what it wrote before you submit it. AI can state wrong facts with confidence, so check anything about pricing or features on the tool's official site.
 
 After editing, run `python3 scripts/update_site.py` (or ask your AI to). It refreshes the site search and catches broken links.
+
+## Getting credit for your work
+
+Your pull request is permanent, public proof of what you did. Add yourself to the table on the [Contributors page](contributors.html) in the same pull request, then use the resume bullet builder there. Describe your work honestly, and say so if an AI assistant helped.

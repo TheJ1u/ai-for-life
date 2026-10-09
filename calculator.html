@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI video cost calculator | AI For Life</title>
+<meta name="description" content="Compare the monthly cost of making videos the usual way with AI tools. Change the numbers to match your business.">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0b0d12">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI For Life">
+<meta property="og:title" content="AI video cost calculator | AI For Life">
+<meta property="og:description" content="Compare the monthly cost of making videos the usual way with AI tools. Change the numbers to match your business.">
+<meta property="og:url" content="https://thej1u.github.io/ai-for-life/calculator.html">
+<meta property="og:image" content="https://thej1u.github.io/ai-for-life/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://thej1u.github.io/ai-for-life/calculator.html">
+</head>
+<body data-root="">
+<header class="topbar"><a class="brand" href="index.html">AI For Life</a><nav><a href="start.html">Start here</a><a href="index.html#tools">Tools</a><a href="meetings.html">Meetings</a><a href="prompts.html">Prompts</a><a href="showcase.html">Showcase</a><a href="glossary.html">Glossary</a><a href="share.html">Share</a></nav><button class="btn install-top" type="button" data-install hidden>Install app</button><div class="search-wrap"><input id="site-search" class="sitesearch" type="search" placeholder="Search the site ( / )" aria-label="Search the whole site" autocomplete="off"><div id="results" class="results" hidden></div></div></header>
+<main class="wrap article">
+<span class="tag">Business toolkit</span><h1>AI video cost calculator</h1>
+<p class="lede">Compare what you spend now on making videos with what it could cost with AI tools. Change the numbers to match your situation.</p>
+<p class="note">The starting numbers are only examples, not real prices. Replace them with your own. Tool prices change, so check each tool's official site.</p>
+<form id="calc" class="calc" onsubmit="return false">
+<div class="calcgrid">
+<fieldset><legend>Your situation</legend>
+<label>Videos per month<input id="videos" type="number" min="0" step="1" inputmode="decimal"></label>
+<label>Your time is worth ($ per hour)<input id="rate" type="number" min="0" step="1" inputmode="decimal"></label>
+</fieldset>
+<fieldset><legend>How you make videos now</legend>
+<label>Paid cost per video ($)<input id="paid" type="number" min="0" step="1" inputmode="decimal"></label>
+<label>Your hours per video<input id="hrsnow" type="number" min="0" step="0.5" inputmode="decimal"></label>
+</fieldset>
+<fieldset><legend>With AI tools</legend>
+<label>Tool subscriptions ($ per month)<input id="tool" type="number" min="0" step="1" inputmode="decimal"></label>
+<label>Extra credits or fees per video ($)<input id="extra" type="number" min="0" step="1" inputmode="decimal"></label>
+<label>Your hours per video (prompting, reviewing, editing)<input id="hrsai" type="number" min="0" step="0.5" inputmode="decimal"></label>
+</fieldset>
+</div>
+<div class="btnrow"><button class="btn ghost" type="button" id="calc-reset">Reset to examples</button><button class="btn ghost" type="button" id="calc-copy">Copy a link to my numbers</button></div>
+</form>
+
+<h2>Results</h2>
+<div class="stats" aria-live="polite">
+<div class="stat"><span>Monthly cost now</span><strong id="o-now">-</strong></div>
+<div class="stat"><span>Monthly cost with AI</span><strong id="o-ai">-</strong></div>
+<div class="stat good"><span>Monthly savings</span><strong id="o-save">-</strong></div>
+<div class="stat"><span>Savings per year</span><strong id="o-year">-</strong></div>
+</div>
+<div class="bars" aria-hidden="true">
+<div class="barrow"><span>Now</span><div class="bar"><i id="b-now"></i></div></div>
+<div class="barrow"><span>With AI</span><div class="bar"><i id="b-ai" class="ai"></i></div></div>
+</div>
+<p id="o-text" class="note"></p>
+
+<h2>How to read this</h2>
+<ul>
+<li><strong>Break-even:</strong> the number of videos per month where AI starts to cost less, because the monthly subscription is spread across more videos. Shown above when it applies.</li>
+<li><strong>Your time has a cost.</strong> Even if you do the work yourself, hours are not free. Putting a value on them is what makes the comparison fair.</li>
+<li><strong>Cost is not the only factor.</strong> Quality, brand fit, revision rounds, rights and the risk of odd AI details all matter. Test two or three clips before you commit.</li>
+<li><strong>This is a simple model.</strong> It is a cost comparison, not a promise of results. Pair it with a real measure such as views, leads or sales.</li>
+</ul>
+<h2>Why it matters for business and IS</h2>
+<p>This is a basic cost-benefit and break-even analysis, the same method used to justify any system or tool. Making assumptions visible and easy to change is a core business-analyst skill. See <a href="glossary.html">ROI and break-even point</a> in the glossary, and the <a href="safe-ai.html">safe AI checklist</a> before you publish.</p>
+</main>
+<footer><p class="foot-links"><a href="#" data-install-link>Install the app</a> · <a href="roadmap.html">Roadmap</a> · <a href="board.html">Board</a> · <a href="contributors.html">Contributors</a> · <a href="share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
+<script src="script.js"></script>
+</body>
+</html>

@@ -10,7 +10,7 @@ Repo: https://github.com/TheJ1u/ai-for-life
 1. Ask what they want to add (a tool guide, a prompt, a project, a meeting note, a glossary word, or a fix). If they are unsure, suggest one from the list in `CONTRIBUTING.md`.
 2. Explain each step in plain language first, technical detail second. Connect ideas to business use where it fits.
 3. Make the smallest change that does the job. Do not redesign pages or rewrite other people's content.
-4. Run `python3 scripts/update_site.py` after editing. It rebuilds the search index and checks for broken links. Fix anything it reports.
+4. Run `python3 scripts/update_site.py` after editing. It rebuilds the search index and the sitemap, adds link-preview tags to every page, and checks for broken links. Fix anything it reports.
 5. Show the contributor what changed, then help them submit it:
    - Work on their **fork** or a **new branch**, never directly on `main` unless they are the repo owner.
    - Commit with a short, clear message, and open a **pull request**. The owner reviews and merges it.
@@ -29,6 +29,11 @@ A plain **static website**: HTML, CSS and a little JavaScript. There is no build
 | `showcase.html` | Member projects |
 | `glossary.html` | Plain-English terms |
 | `roadmap.html`, `share.html` | Learning path; QR code and install steps |
+| `safe-ai.html`, `calculator.html` | Safe AI checklist; AI video cost calculator (JS in `script.js`) |
+| `board.html` | Kanban-style roadmap board (Ideas, In progress, Done) |
+| `contributors.html` | Contribution log, resume bullet builder, proof links |
+| `404.html` | Shown for missing pages. Uses `<base href="/ai-for-life/">`; update it if the web address changes |
+| `sitemap.xml`, `robots.txt` | **Generated** by `scripts/update_site.py`. Never edit by hand |
 | `tools/*.html` | One guide per tool |
 | `templates/tool-template.html` | Copy this to start a new tool guide |
 | `style.css`, `script.js`, `sw.js` | Styles, behavior, offline support |
@@ -43,6 +48,8 @@ Every page repeats the same header and footer. If you change the navigation, cha
 - **Prompt:** copy the template at the bottom of `prompts.html` and paste it after the last prompt card. Use the same categories as the filter buttons (Video, Learning, Writing, Business, Building).
 - **Meeting note:** paste the template from `meetings.html` just above the line `Add new meetings ABOVE this line`. Newest first. Never invent what happened at a meeting. If the contributor was not there, leave it.
 - **Project:** paste the template from `showcase.html` above `Add new projects ABOVE this line`.
+- **Credit:** every contributor adds a row to the table in `contributors.html` (above the `Add new contributors ABOVE this line` comment) in the same pull request. Use their GitHub handle, and their name only if they ask. Never invent contributions or levels.
+- **Board card:** move or add a card in `board.html` when work starts or finishes.
 - **Glossary word:** copy an existing `<article class="term" ...>` in `glossary.html`. Give it a unique `id="t-word"`, and put the lowercase searchable text in `data-term`.
 
 Meetings are **every Thursday, 4:00 to 5:00 PM Mountain, at BYU**. The "next meeting" banner works that out automatically, so do not hard-code dates.

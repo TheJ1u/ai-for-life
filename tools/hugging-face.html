@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hugging Face | AI For Life</title>
+<meta name="description" content="The GitHub of AI: a place to find, test, share and run open models and datasets.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="../index.html">AI For Life</a><nav><a href="../index.html">Home</a><a href="../index.html#tools">Tools</a><a href="../glossary.html">Glossary</a><a href="../roadmap.html">Roadmap</a></nav></header>
+<main class="wrap article">
+<p class="crumb"><a href="../index.html#tools">← All tools</a></p>
+<span class="tag">Model hub</span>
+<h1>Hugging Face</h1>
+<p class="lede">The GitHub of AI: a place to find, test, share and run open models and datasets.</p>
+<p class="meta">By Hugging Face</p>
+<h2>What it is</h2><p>Hugging Face is a website and community where people publish AI models, datasets, and small demo apps called Spaces. It also makes popular open-source libraries such as Transformers. If a company releases open weights, they usually appear on Hugging Face first.</p>
+<h2>Why people use it</h2><ul><li>Free access to thousands of open models for text, images, audio and video.</li><li>You can try a model in the browser before writing any code.</li><li>It is the standard place to publish your own model or dataset, which looks great on a portfolio.</li></ul>
+<h2>How to get started</h2><ol class="steps"><li>Create a free account at huggingface.co.</li><li>Browse Models and filter by task (text generation, text-to-image, speech, and so on).</li><li>Open a model page and read the <strong>model card</strong>: what it does, license, limits.</li><li>Try it in the page widget or a Space. No code needed.</li><li>When ready, run it in Google Colab (free GPU time) or call it through an API.</li></ol>
+<h2>Try this</h2>
+<div class="code"><button class="copy" data-copy>Copy</button><pre>from transformers import pipeline
+
+classifier = pipeline(&#x27;sentiment-analysis&#x27;)
+print(classifier(&#x27;Our new Medicare guide helped so many clients!&#x27;))</pre></div>
+<p class="note">Your first code: 3 lines to run a sentiment model. Run it in Google Colab so you install nothing.</p>
+<h2>Why it matters for business and IS</h2><p>Information Systems angle: open models let a startup avoid per-use API costs and keep data in-house, at the price of managing infrastructure.</p>
+<h2>Quick facts</h2><ul><li>Free to use; paid options exist for hosting and enterprise features.</li><li>Key words: Hub, model card, dataset, Space, Transformers, open weights, license.</li><li>Always check the license before using a model commercially.</li></ul>
+<h2>What to learn next</h2><p>Follow the free Hugging Face LLM course, then do the 'Build your own model' guide in this repo.</p>
+<div class="btnrow"><a class="btn ghost" href="https://huggingface.co" target="_blank" rel="noopener">Hugging Face ↗</a><a class="btn ghost" href="https://huggingface.co/learn" target="_blank" rel="noopener">Free Hugging Face courses ↗</a></div>
+</main>
+<footer><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
+<script src="../script.js"></script>
+</body>
+</html>

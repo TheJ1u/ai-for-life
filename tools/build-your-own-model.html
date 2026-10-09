@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build Your Own Model | AI For Life</title>
+<meta name="description" content="A beginner path from using AI tools to training and publishing a small model of your own.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="../index.html">AI For Life</a><nav><a href="../index.html">Home</a><a href="../index.html#tools">Tools</a><a href="../glossary.html">Glossary</a><a href="../roadmap.html">Roadmap</a></nav></header>
+<main class="wrap article">
+<p class="crumb"><a href="../index.html#tools">← All tools</a></p>
+<span class="tag">Learn to build</span>
+<h1>Build Your Own Model</h1>
+<p class="lede">A beginner path from using AI tools to training and publishing a small model of your own.</p>
+<p class="meta">By Club guide</p>
+<h2>What it is</h2><p>You do not need to train a giant model from scratch (that costs millions). The realistic path is to <strong>fine-tune</strong> an existing open model on your own data, or to build a small classic machine-learning model for a business problem. This page shows the ladder from easiest to hardest.</p>
+<h2>Why people use it</h2><ul><li>Shows employers you understand how AI works, not just how to use it.</li><li>A model trained on your data can beat a general tool for a narrow task.</li><li>Great portfolio project for Information Systems, analytics and startups.</li></ul>
+<h2>How to get started</h2><ol class="steps"><li><strong>Level 1, use:</strong> run an existing model on Hugging Face (3-line pipeline).</li><li><strong>Level 2, prompt:</strong> give a model examples and instructions (no training).</li><li><strong>Level 3, fine-tune:</strong> adapt an open model with your own examples. LoRA is a cheap way to do this.</li><li><strong>Level 4, classic ML:</strong> train a small model with scikit-learn on a spreadsheet (for example, predicting which leads convert).</li><li><strong>Publish:</strong> upload your model and a model card to Hugging Face and link it in your portfolio.</li></ol>
+<h2>Try this</h2>
+<div class="code"><button class="copy" data-copy>Copy</button><pre>from sklearn.linear_model import LogisticRegression
+# X = columns like age, calls_made, emails_opened
+# y = 1 if the lead became a client, else 0
+model = LogisticRegression().fit(X, y)
+print(model.predict_proba(new_lead))</pre></div>
+<p class="note">Idea: predict which leads become clients from a simple spreadsheet. Run it in Google Colab.</p>
+<h2>Why it matters for business and IS</h2><p>Data comes first. Clean, labeled data is usually the hard part and the real asset. Never train on private client data without permission.</p>
+<h2>Quick facts</h2><ul><li>Free tools: Google Colab, Hugging Face, scikit-learn, Kaggle datasets.</li><li>Fine-tuning needs a GPU; Colab's free tier can handle small experiments.</li><li>Measure results with held-out test data, not the data you trained on.</li></ul>
+<h2>What to learn next</h2><p>Complete Kaggle's free 'Intro to Machine Learning', then replicate it with your own small dataset.</p>
+<div class="btnrow"><a class="btn ghost" href="https://colab.research.google.com" target="_blank" rel="noopener">Google Colab ↗</a><a class="btn ghost" href="https://www.kaggle.com/learn" target="_blank" rel="noopener">Kaggle Learn ↗</a><a class="btn ghost" href="https://huggingface.co/learn" target="_blank" rel="noopener">Hugging Face Learn ↗</a></div>
+</main>
+<footer><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
+<script src="../script.js"></script>
+</body>
+</html>

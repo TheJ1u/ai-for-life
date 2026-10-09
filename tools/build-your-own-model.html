@@ -30,7 +30,7 @@
 <p class="lede">A beginner path from using AI tools to training and publishing a small model of your own.</p>
 <p class="meta">By Club guide</p>
 <p class="note"><a href="#walkthrough">Jump to the full step-by-step walkthrough ↓</a></p><h2 id="demo">Quick demo</h2><figure class="demo"><video controls preload="metadata" playsinline poster="../assets/demos/poster-build-your-own-model.jpg"><source src="../assets/demos/demo-build-your-own-model.mp4" type="video/mp4">Your browser cannot play this video.</video><figcaption>Real code run on 200 made-up leads using scikit-learn. The result is unedited, and it is a good lesson: the model only matched the guess-no baseline.</figcaption></figure><h2>What it is</h2><p>You do not need to train a giant model from scratch (that costs millions). The realistic path is to <strong>fine-tune</strong> an existing open model on your own data, or to build a small classic machine-learning model for a business problem. This page shows the ladder from easiest to hardest.</p>
-<h2>Why people use it</h2><ul><li>Shows employers you understand how AI works, not just how to use it.</li><li>A model trained on your data can beat a general tool for a narrow task.</li><li>Great portfolio project for Information Systems, analytics and startups.</li></ul>
+<h2>Why people use it</h2><ul><li>Shows employers you understand how AI works, not just how to use it.</li><li>A model trained on your data can beat a general tool for a narrow task.</li><li>Great portfolio project for analytics and startups.</li></ul>
 <h2>How to get started</h2><ol class="steps"><li><strong>Level 1, use:</strong> run an existing model on Hugging Face (3-line pipeline).</li><li><strong>Level 2, prompt:</strong> give a model examples and instructions (no training).</li><li><strong>Level 3, fine-tune:</strong> adapt an open model with your own examples. LoRA is a cheap way to do this.</li><li><strong>Level 4, classic ML:</strong> train a small model with scikit-learn on a spreadsheet (for example, predicting which leads convert).</li><li><strong>Publish:</strong> upload your model and a model card to Hugging Face and link it in your portfolio.</li></ol>
 <h2>Try this</h2>
 <div class="code"><button class="copy" data-copy>Copy</button><pre>from sklearn.linear_model import LogisticRegression
@@ -39,7 +39,7 @@
 model = LogisticRegression().fit(X, y)
 print(model.predict_proba(new_lead))</pre></div>
 <p class="note">Idea: predict which leads become clients from a simple spreadsheet. Run it in Google Colab.</p>
-<h2>Why it matters for business and IS</h2><p>Data comes first. Clean, labeled data is usually the hard part and the real asset. Never train on private client data without permission.</p>
+<h2>Why it matters for business</h2><p>Data comes first. Clean, labeled data is usually the hard part and the real asset. Never train on private client data without permission.</p>
 <h2 id="walkthrough">Full walkthrough: train your first model in about an hour</h2>
 <h3>1. The idea in business terms</h3>
 <p>A model is a pattern-finder. You show it many past examples with the right answers (for example, leads and whether they became clients). It learns what separates the groups, then predicts new cases. The quality of your data matters more than the fancy part.</p>

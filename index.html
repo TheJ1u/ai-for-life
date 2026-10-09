@@ -6,9 +6,15 @@
 <title>Home | AI For Life</title>
 <meta name="description" content="AI For Life club: guides to FLUX 3, Higgsfield, Google AI Edge Eloquent, Hugging Face, CapCut and a glossary.">
 <link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0b0d12">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 </head>
-<body>
-<header class="topbar"><a class="brand" href="index.html">AI For Life</a><nav><a href="index.html">Home</a><a href="index.html#tools">Tools</a><a href="glossary.html">Glossary</a><a href="roadmap.html">Roadmap</a></nav></header>
+<body data-root="">
+<header class="topbar"><a class="brand" href="index.html">AI For Life</a><nav><a href="index.html">Home</a><a href="index.html#tools">Tools</a><a href="glossary.html">Glossary</a><a href="roadmap.html">Roadmap</a><a href="share.html">Share</a></nav><div class="search-wrap"><input id="site-search" class="sitesearch" type="search" placeholder="Search the site ( / )" aria-label="Search the whole site" autocomplete="off"><div id="results" class="results" hidden></div></div></header>
 <section class="hero">
 <video class="herovideo" autoplay muted loop playsinline preload="metadata" poster="assets/header-poster.jpg">
 <source src="assets/header.mp4" type="video/mp4">
@@ -33,9 +39,15 @@
 <section><h2>A simple workflow</h2>
 <ol class="flow"><li><strong>Dictate</strong><span>Speak your idea into Eloquent</span></li><li><strong>Generate</strong><span>Make clips in FLUX 3 or Higgsfield</span></li><li><strong>Edit</strong><span>Cut and caption in CapCut</span></li><li><strong>Publish</strong><span>Post and track what works</span></li></ol>
 </section>
+<section id="share"><h2>Share this site</h2>
+<div class="sharebox">
+<img class="qr" src="assets/qr.png" width="240" height="240" alt="QR code that opens the AI For Life site" loading="lazy">
+<div><p>Scan the code, or send the link. No account and nothing to install.</p>
+<div class="btnrow"><button class="btn" type="button" data-share>Share</button><button class="btn ghost" type="button" data-copylink>Copy link</button><button class="btn ghost" type="button" data-install hidden>Install the app</button><a class="btn ghost" href="share.html">Add to home screen</a></div></div>
+</div></section>
 <section><h2>Contribute</h2><p>Found a better prompt or a new tool? Open an issue or pull request on this repo, or send it to the club chat. Good notes get added.</p></section>
 </main>
-<footer><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
+<footer><p class="foot-links"><a href="share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
 <script src="script.js"></script>
 </body>
 </html>

@@ -43,3 +43,23 @@ main section{padding:36px 0}h2{font-size:28px;margin:34px 0 14px}h3{margin:0 0 6
 code{background:#0e1219;padding:1px 6px;border-radius:6px;font-size:.92em}
 footer{border-top:1px solid var(--line);color:var(--muted);text-align:center;padding:26px 20px;font-size:14px}
 @media (prefers-reduced-motion:reduce){.herovideo{display:none}html{scroll-behavior:auto}.card{transition:none}}
+
+/* search */
+.search-wrap{position:relative;flex:1;max-width:280px;min-width:130px}
+.sitesearch{width:100%;padding:7px 12px;background:var(--panel);border:1px solid var(--line);border-radius:999px;color:var(--text);font-size:14px}
+.sitesearch:focus{outline:2px solid var(--accent);border-color:transparent}
+.results{position:absolute;top:calc(100% + 8px);right:0;width:min(420px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,.5);max-height:70vh;overflow:auto;z-index:20}
+.results a{display:block;padding:10px 14px;text-decoration:none;color:var(--text);border-bottom:1px solid var(--line)}
+.results a:last-child{border-bottom:0}.results a:hover,.results a:focus{background:var(--panel2)}
+.results strong{display:block;font-size:15px}.results small{color:var(--muted);font-size:13px;display:block;margin-top:2px}
+.results .kind{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);float:right;margin-left:8px}
+.results .empty{padding:14px;color:var(--muted);font-size:14px}
+mark{background:rgba(124,240,200,.25);color:inherit;border-radius:3px}
+.topbar{flex-wrap:wrap}
+/* share */
+.sharebox{display:flex;gap:24px;align-items:center;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0}
+.qr{background:#fff;border-radius:12px;width:240px;height:240px;max-width:100%}
+.foot-links a{color:var(--muted)}
+.term:target{outline:2px solid var(--accent2)}
+button.btn{border:0;cursor:pointer;font:inherit;font-weight:700}button.btn.ghost{border:1px solid var(--line)}
+@media print{.topbar,.btnrow,footer{display:none}body{background:#fff;color:#000}.qr{width:340px;height:340px}}

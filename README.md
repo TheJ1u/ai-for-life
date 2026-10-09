@@ -2,7 +2,9 @@
 
 A beginner-friendly guide to the AI tools we talk about in the **AI For Life** club, plus a glossary of the tech and business words you will hear.
 
-**Live site:** enable GitHub Pages (Settings, Pages, deploy from `main`, folder `/ (root)`) and your site will appear at `https://YOUR-USERNAME.github.io/ai-for-life/`.
+**Live site:** https://thej1u.github.io/ai-for-life/ (no account or install needed, just open the link).
+
+*Want your own copy of this site?* Fork the repo, then turn on GitHub Pages: Settings, Pages, deploy from `main`, folder `/ (root)`. GitHub Pages is a free switch that turns the repo's files into a website, and it will appear at `https://YOUR-USERNAME.github.io/ai-for-life/` (replace YOUR-USERNAME with your GitHub username).
 
 ## What is inside
 
@@ -36,3 +38,12 @@ Open an issue or pull request with a better prompt, a fix, or a new tool. Keep c
 ## Notes
 
 Tools and prices change quickly. Confirm details on each official site. Do not commit API keys or private data.
+
+## Extras built in
+
+- **Search:** the box in the header searches every tool page, the glossary terms and the other pages. It reads `search-index.json`.
+- **Share and install:** `share.html` has a QR code, a Share button, and steps to add the site to a phone home screen. The site is also an installable web app (`manifest.webmanifest`, `sw.js`).
+
+## Regenerating the QR code and search index
+
+The QR code points to `https://thej1u.github.io/ai-for-life/`. If you move to a custom domain, make a new QR code for the new address and replace `assets/qr.png` and `assets/qr.svg`. Whenever you add or edit pages, the search index (`search-index.json`) needs to be rebuilt too.

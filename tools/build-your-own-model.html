@@ -6,9 +6,15 @@
 <title>Build Your Own Model | AI For Life</title>
 <meta name="description" content="A beginner path from using AI tools to training and publishing a small model of your own.">
 <link rel="stylesheet" href="../style.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b0d12">
+<link rel="icon" href="../assets/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 </head>
-<body>
-<header class="topbar"><a class="brand" href="../index.html">AI For Life</a><nav><a href="../index.html">Home</a><a href="../index.html#tools">Tools</a><a href="../glossary.html">Glossary</a><a href="../roadmap.html">Roadmap</a></nav></header>
+<body data-root="../">
+<header class="topbar"><a class="brand" href="../index.html">AI For Life</a><nav><a href="../index.html">Home</a><a href="../index.html#tools">Tools</a><a href="../glossary.html">Glossary</a><a href="../roadmap.html">Roadmap</a><a href="../share.html">Share</a></nav><div class="search-wrap"><input id="site-search" class="sitesearch" type="search" placeholder="Search the site ( / )" aria-label="Search the whole site" autocomplete="off"><div id="results" class="results" hidden></div></div></header>
 <main class="wrap article">
 <p class="crumb"><a href="../index.html#tools">← All tools</a></p>
 <span class="tag">Learn to build</span>
@@ -30,7 +36,7 @@ print(model.predict_proba(new_lead))</pre></div>
 <h2>What to learn next</h2><p>Complete Kaggle's free 'Intro to Machine Learning', then replicate it with your own small dataset.</p>
 <div class="btnrow"><a class="btn ghost" href="https://colab.research.google.com" target="_blank" rel="noopener">Google Colab ↗</a><a class="btn ghost" href="https://www.kaggle.com/learn" target="_blank" rel="noopener">Kaggle Learn ↗</a><a class="btn ghost" href="https://huggingface.co/learn" target="_blank" rel="noopener">Hugging Face Learn ↗</a></div>
 </main>
-<footer><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
+<footer><p class="foot-links"><a href="../share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
 <script src="../script.js"></script>
 </body>
 </html>

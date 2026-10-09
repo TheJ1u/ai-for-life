@@ -23,12 +23,6 @@ document.querySelectorAll('[data-share]').forEach(function(b){b.addEventListener
 document.querySelectorAll('[data-copylink]').forEach(function(b){b.addEventListener('click',function(){
  copy(siteUrl).then(function(){flash(b,'Copied')}).catch(function(){flash(b,'Select the link')});});});
 
-var deferred=null;
-window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;
- document.querySelectorAll('[data-install]').forEach(function(b){b.hidden=false;});});
-document.querySelectorAll('[data-install]').forEach(function(b){b.addEventListener('click',function(){
- if(!deferred)return;deferred.prompt();deferred.userChoice.finally(function(){deferred=null;b.hidden=true;});});});
-
 if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){
  navigator.serviceWorker.register(root+'sw.js').catch(function(){});}
 
@@ -59,14 +53,42 @@ document.addEventListener('keydown',function(e){
  if(e.key==='Escape'){res.hidden=true;box.blur();}});
 document.addEventListener('click',function(e){if(!res.contains(e.target)&&e.target!==box)res.hidden=true;});
 })();
-/* iPhone/iPad: Safari has no install button, so show the manual steps */
+
+/* ---- Install button (works on every page, every device) ---- */
 (function(){
+var root=document.body.getAttribute('data-root')||'';
 var ua=navigator.userAgent||'';
 var ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var android=/Android/i.test(ua);
+var inApp=/GroupMe|FBAN|FBAV|Instagram|Line\/|MicroMessenger|Snapchat|TikTok|; wv\)|\bwv\b/i.test(ua)||(ios&&!/Safari\//.test(ua));
+var iosChrome=ios&&/CriOS|FxiOS|EdgiOS/.test(ua);
 var standalone=window.navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
-var anchor=document.querySelector('[data-install]');
-if(!anchor||standalone)return;
-if(ios){var d=document.createElement('div');d.className='iostip';
- d.innerHTML='<strong>On iPhone or iPad:</strong> there is no install button. Tap the <strong>Share</strong> icon in Safari (square with an arrow), then <strong>Add to Home Screen</strong>, then <strong>Add</strong>.';
- anchor.parentNode.insertBefore(d,anchor);}
+var deferred=null,btns=[].slice.call(document.querySelectorAll('[data-install]'));
+if(standalone){btns.forEach(function(b){b.hidden=true});return;}
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;});
+window.addEventListener('appinstalled',function(){btns.forEach(function(b){b.hidden=true});close();});
+
+var modal=document.createElement('div');modal.className='modal';modal.hidden=true;
+modal.innerHTML='<div class="modalbox" role="dialog" aria-modal="true" aria-label="Install AI For Life"><button class="x" type="button" aria-label="Close">&times;</button><h3>Install AI For Life</h3><div class="modalbody"></div><div class="btnrow"><button class="btn" type="button" data-mcopy>Copy link</button><button class="btn ghost" type="button" data-mclose>Close</button></div></div>';
+document.body.appendChild(modal);
+var body=modal.querySelector('.modalbody');
+function close(){modal.hidden=true;}
+function steps(){
+ var u=new URL(root||'./',location.href).href;
+ if(inApp)return '<p>This looks like an in-app browser (like GroupMe), which cannot install apps.</p><ol><li>Tap <strong>Copy link</strong> below.</li><li>Open '+(ios?'<strong>Safari</strong>':'<strong>Chrome</strong>')+' and paste the link in the address bar.</li><li>Tap the Install button again there.</li></ol>';
+ if(ios&&iosChrome)return '<p>On iPhone, installing only works from Safari.</p><ol><li>Tap <strong>Copy link</strong> below.</li><li>Open <strong>Safari</strong> and paste the link.</li><li>Tap the <strong>Share</strong> icon, then <strong>Add to Home Screen</strong>, then <strong>Add</strong>.</li></ol>';
+ if(ios)return '<p>Apple does not let websites install themselves, so it takes 3 taps:</p><ol><li>Tap the <strong>Share</strong> icon in Safari (square with an arrow up). It is at the bottom of the screen, or top right on iPad.</li><li>Scroll down and tap <strong>Add to Home Screen</strong>.</li><li>Tap <strong>Add</strong>. The AI For Life icon appears on your home screen.</li></ol>';
+ if(android)return '<ol><li>Tap the <strong>three dots</strong> menu in Chrome.</li><li>Tap <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li><li>Tap <strong>Install</strong>.</li></ol>';
+ return '<p>Look for the install icon at the right end of the address bar (Chrome or Edge), or open the browser menu and choose <strong>Install AI For Life</strong>.</p><p>On Firefox or desktop Safari you can bookmark the page instead.</p>';
+}
+function open(){body.innerHTML=steps();modal.hidden=false;modal.querySelector('[data-mclose]').focus();}
+modal.addEventListener('click',function(e){if(e.target===modal||e.target.classList.contains('x')||e.target.hasAttribute('data-mclose'))close();});
+modal.querySelector('[data-mcopy]').addEventListener('click',function(e){var b=e.target,u=new URL(root||'./',location.href).href;
+ var done=function(t){var o=b.textContent;b.textContent=t;setTimeout(function(){b.textContent=o},1600);};
+ (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(function(){done('Copied')}).catch(function(){done('Select the link')});});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+btns.forEach(function(b){b.hidden=false;b.addEventListener('click',function(){
+ if(deferred){deferred.prompt();deferred.userChoice.finally(function(){deferred=null;});}
+ else open();});});
 })();
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-install-link]');if(a){e.preventDefault();var b=document.querySelector('button[data-install]');if(b)b.click();}});

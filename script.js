@@ -28,6 +28,7 @@ if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){
 
 var box=document.getElementById('site-search'),res=document.getElementById('results'),idx=null,loading=null;
 if(!box||!res)return;
+var status=document.getElementById('search-status'),version=0;
 function load(){if(idx)return Promise.resolve(idx);
  if(!loading)loading=fetch(root+'search-index.json').then(function(r){return r.json()}).then(function(j){idx=j;return j}).catch(function(){idx=[];return idx;});
  return loading;}
@@ -35,22 +36,24 @@ function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'
 function hi(s,toks){var out=esc(s);toks.forEach(function(t){if(t.length<2)return;out=out.replace(new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>');});return out;}
 function snippet(x,toks){var l=x.toLowerCase(),p=-1;for(var i=0;i<toks.length;i++){p=l.indexOf(toks[i]);if(p>-1)break;}
  if(p<0)return x.slice(0,110);var s=Math.max(0,p-45);return (s>0?'…':'')+x.slice(s,s+120)+(s+120<x.length?'…':'');}
-function run(){var q=box.value.trim().toLowerCase();
- if(!q){res.hidden=true;return;}
+function run(){var current=++version,q=box.value.trim().toLowerCase();
+ if(!q){res.hidden=true;status.textContent='';return;}
  var toks=q.split(/\s+/).filter(Boolean);
  load().then(function(d){
+  if(current!==version)return;
   var hits=[];d.forEach(function(e){var t=e.t.toLowerCase(),x=e.x.toLowerCase(),sc=0,ok=true;
    toks.forEach(function(k){var inT=t.indexOf(k)>-1,inX=x.indexOf(k)>-1;if(!inT&&!inX){ok=false;return;}
     sc+=inT?(t===k?30:10):0;sc+=inX?2:0;});
    if(ok){if(e.k==='Glossary')sc+=1;hits.push({e:e,s:sc});}});
   hits.sort(function(a,b){return b.s-a.s});hits=hits.slice(0,8);
+  status.textContent=hits.length+' results. Tab to browse links; Escape closes results.';
   if(!hits.length){res.innerHTML='<div class="empty">No matches. Try a different word.</div>';res.hidden=false;return;}
   res.innerHTML=hits.map(function(h){return '<a href="'+root+h.e.u+'"><span class="kind">'+h.e.k+'</span><strong>'+hi(h.e.t,toks)+'</strong><small>'+hi(snippet(h.e.x,toks),toks)+'</small></a>';}).join('');
   res.hidden=false;});}
 box.addEventListener('input',run);box.addEventListener('focus',function(){load();if(box.value.trim())run();});
 document.addEventListener('keydown',function(e){
  if(e.key==='/'&&document.activeElement!==box&&!/input|textarea/i.test(document.activeElement.tagName)){e.preventDefault();box.focus();}
- if(e.key==='Escape'){res.hidden=true;box.blur();}});
+ if(e.key==='Escape'&&(document.activeElement===box||res.contains(document.activeElement))){box.focus();version++;res.hidden=true;}});
 document.addEventListener('click',function(e){if(!res.contains(e.target)&&e.target!==box)res.hidden=true;});
 })();
 
@@ -71,8 +74,8 @@ window.addEventListener('appinstalled',function(){btns.forEach(function(b){b.hid
 var modal=document.createElement('div');modal.className='modal';modal.hidden=true;
 modal.innerHTML='<div class="modalbox" role="dialog" aria-modal="true" aria-label="Install AI For Life"><button class="x" type="button" aria-label="Close">&times;</button><h3>Install AI For Life</h3><div class="modalbody"></div><div class="btnrow"><button class="btn" type="button" data-mcopy>Copy link</button><button class="btn ghost" type="button" data-mclose>Close</button></div></div>';
 document.body.appendChild(modal);
-var body=modal.querySelector('.modalbody');
-function close(){modal.hidden=true;}
+var body=modal.querySelector('.modalbody'),previous=null,inertNodes=[];
+function close(){if(modal.hidden)return;modal.hidden=true;inertNodes.forEach(function(el){el.inert=false;});inertNodes=[];if(previous&&previous.isConnected)previous.focus();}
 function steps(){
  var u=new URL(root||'./',location.href).href;
  if(inApp)return '<p>This looks like an in-app browser (like GroupMe), which cannot install apps.</p><ol><li>Tap <strong>Copy link</strong> below.</li><li>Open '+(ios?'<strong>Safari</strong>':'<strong>Chrome</strong>')+' and paste the link in the address bar.</li><li>Tap the Install button again there.</li></ol>';
@@ -81,7 +84,14 @@ function steps(){
  if(android)return '<ol><li>Tap the <strong>three dots</strong> menu in Chrome.</li><li>Tap <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li><li>Tap <strong>Install</strong>.</li></ol>';
  return '<p>Look for the install icon at the right end of the address bar (Chrome or Edge), or open the browser menu and choose <strong>Install AI For Life</strong>.</p><p>On Firefox or desktop Safari you can bookmark the page instead.</p>';
 }
-function open(){body.innerHTML=steps();modal.hidden=false;modal.querySelector('[data-mclose]').focus();}
+function open(){previous=document.activeElement;body.innerHTML=steps();modal.hidden=false;inertNodes=Array.from(document.body.children).filter(function(el){return el!==modal&&!el.inert&&el.tagName!=='SCRIPT';});inertNodes.forEach(function(el){el.inert=true;});modal.querySelector('.x').focus();}
+modal.addEventListener('keydown',function(e){
+ if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close();return;}
+ if(e.key!=='Tab')return;
+ var items=Array.from(modal.querySelectorAll('button,a[href],input,[tabindex="0"]')).filter(function(el){return !el.disabled&&!el.hidden;});
+ var first=items[0],last=items[items.length-1];
+ if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
 modal.addEventListener('click',function(e){if(e.target===modal||e.target.classList.contains('x')||e.target.hasAttribute('data-mclose'))close();});
 modal.querySelector('[data-mcopy]').addEventListener('click',function(e){var b=e.target,u=new URL(root||'./',location.href).href;
  var done=function(t){var o=b.textContent;b.textContent=t;setTimeout(function(){b.textContent=o},1600);};
@@ -91,24 +101,19 @@ btns.forEach(function(b){b.hidden=false;b.addEventListener('click',function(){
  if(deferred){deferred.prompt();deferred.userChoice.finally(function(){deferred=null;});}
  else open();});});
 })();
-document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-install-link]');if(a){e.preventDefault();var b=document.querySelector('button[data-install]');if(b)b.click();}});
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-install-link]');if(a){e.preventDefault();a.focus();var b=document.querySelector('button[data-install]');if(b)b.click();}});
 
-/* ---- next meeting banner: every Thursday 4:00 to 5:00 PM Mountain ---- */
+/* Only organizer-confirmed dates are advertised. Offline copies cannot confirm changes. */
 (function(){
-var els=document.querySelectorAll('[data-nextmeeting] .nm');if(!els.length)return;
-try{
- var f=new Intl.DateTimeFormat('en-US',{timeZone:'America/Denver',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',hour12:false,weekday:'short'});
- var parts={};f.formatToParts(new Date()).forEach(function(p){parts[p.type]=p.value;});
- var dow={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[parts.weekday];
- var hour=parseInt(parts.hour,10)%24,min=parseInt(parts.minute,10);
- var ahead=(4-dow+7)%7;
- var live=dow===4&&(hour>=16&&hour<17);
- if(dow===4&&hour>=17)ahead=7;
- var d=new Date(Date.UTC(+parts.year,+parts.month-1,+parts.day+ahead,12));
- var label=d.toLocaleDateString('en-US',{timeZone:'UTC',weekday:'long',month:'long',day:'numeric'});
- var txt=live?'Happening now, until 5:00 PM at BYU':(ahead===0?'Today':label)+', 4:00 PM at BYU';
- els.forEach(function(e){e.textContent=txt;});
-}catch(e){}
+ const els=document.querySelectorAll('[data-nextmeeting] .nm');if(!els.length)return;
+ const root=document.body.dataset.root||'';
+ fetch(root+'meetings.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Unavailable');return r.json()}).then(data=>{
+  const cancelled=new Set(data.cancellations.map(e=>e.id));
+  const event=data.events.filter(e=>!cancelled.has(e.id)&&Date.parse(e.end)>Date.now()).sort((a,b)=>Date.parse(a.start)-Date.parse(b.start))[0];
+  let label='Next date awaiting organizer confirmation. Weekly schedule: '+data.weeklySchedule+'.';
+  if(event){const fmt=new Intl.DateTimeFormat('en-US',{timeZone:data.timezone,dateStyle:'full',timeStyle:'short'});label=fmt.format(new Date(event.start))+' — '+event.topic+'; '+event.location;}
+  els.forEach(el=>el.textContent=label);
+ }).catch(()=>els.forEach(el=>el.textContent='Unable to confirm the next date. Reconnect and check meeting details before attending.'));
 })();
 
 /* ---- prompt library filter ---- */
@@ -206,4 +211,13 @@ if(u&&vo)u.addEventListener('input',function(){
  [['Your pull requests to this site',R+'/pulls?q=is%3Apr+author%3A'+n],['Your commits to this site',R+'/commits?author='+n],['Your GitHub profile','https://github.com/'+n]].forEach(function(x){
   var li=document.createElement('li'),a=document.createElement('a');a.href=x[1];a.target='_blank';a.rel='noopener';a.textContent=x[0]+' ↗';li.appendChild(a);vo.appendChild(li);});
 });
+})();
+
+/* Responsive navigation, media controls, and directory filtering. */
+(function(){
+ const button=document.querySelector('.nav-toggle'),nav=document.getElementById('site-nav');
+ if(button&&nav){button.hidden=false;document.documentElement.classList.add('nav-ready');button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')!=='true';button.setAttribute('aria-expanded',String(open));nav.classList.toggle('is-open',open);});nav.addEventListener('keydown',e=>{if(e.key==='Escape'){button.setAttribute('aria-expanded','false');nav.classList.remove('is-open');button.focus();}});}
+ const video=document.querySelector('.herovideo');
+ if(video){const control=document.createElement('button');control.type='button';control.className='btn ghost light';const motion=matchMedia('(prefers-reduced-motion: reduce)');function label(){control.textContent=video.paused?'Play header video':'Pause header video';}control.addEventListener('click',()=>{if(video.paused)video.play().catch(()=>{});else video.pause();});video.addEventListener('play',label);video.addEventListener('pause',label);motion.addEventListener('change',e=>{if(e.matches)video.pause();});if(motion.matches)video.pause();else video.play().catch(()=>{});label();document.querySelector('.herotext .btnrow').append(control);}
+ const filter=document.getElementById('club-interest');if(filter)filter.addEventListener('change',()=>{let count=0;document.querySelectorAll('[data-interests]').forEach(card=>{card.hidden=filter.value!=='all'&&!card.dataset.interests.split('|').includes(filter.value);if(!card.hidden)count++;});document.getElementById('club-count').textContent=count+' clubs shown';});
 })();

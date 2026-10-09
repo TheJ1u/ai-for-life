@@ -10,6 +10,10 @@ It does four things:
 No extra installs needed. It only uses Python's standard library.
 """
 import datetime, glob, html as H, json, os, re, sys
+from html.parser import HTMLParser
+from pathlib import Path
+from urllib.parse import urlsplit, unquote
+from meeting_calendar import generate as generate_meetings
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
@@ -24,6 +28,7 @@ def text_of(s):
 
 def pages(include_template=False, include_404=True):
     for f in sorted(glob.glob("**/*.html", recursive=True)):
+        f = f.replace(os.sep, '/')
         if f.startswith("templates/") and not include_template:
             continue
         if f == "404.html" and not include_404:
@@ -102,30 +107,75 @@ def build_index():
     print(f"Search index rebuilt: {len(index)} entries")
 
 
+class PageParser(HTMLParser):
+    def __init__(self, source):
+        super().__init__(convert_charrefs=True)
+        self.ids, self.refs, self.errors = set(), [], []
+        self.anchor_depth = 0
+        self.base = None
+        self.feed(source)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'base':
+            self.base = attrs.get('href')
+            return
+        if 'id' in attrs:
+            if attrs['id'] in self.ids:
+                self.errors.append('DUPLICATE ID: ' + attrs['id'])
+            self.ids.add(attrs['id'])
+        if tag == 'a':
+            if self.anchor_depth:
+                self.errors.append('NESTED LINK')
+            self.anchor_depth += 1
+        for key in ('href', 'src', 'poster'):
+            if attrs.get(key):
+                self.refs.append(attrs[key])
+        if attrs.get('srcset'):
+            self.refs.extend(part.strip().split()[0] for part in attrs['srcset'].split(',') if part.strip())
+
+    def handle_endtag(self, tag):
+        if tag == 'a':
+            self.anchor_depth = max(0, self.anchor_depth - 1)
+
+
 def check_pages():
     problems = 0
-    for f in pages(include_template=True):
-        s = open(f, encoding="utf-8").read()
-        for link in re.findall(r'(?:href|src)="([^"#]+)"', s):
-            if link.startswith(("http", "mailto:", "/")):
+    parsed = {os.path.normpath(f): PageParser(Path(f).read_text(encoding='utf-8')) for f in pages(include_template=True)}
+    for f, page in parsed.items():
+        errors = list(page.errors)
+        for ref in page.refs:
+            url = urlsplit(ref)
+            if url.scheme or url.netloc:
                 continue
-            target = os.path.normpath(os.path.join(os.path.dirname(f), link.split("?")[0]))
-            if not os.path.exists(target):
-                print(f"BROKEN LINK in {f}: {link}")
-                problems += 1
-        if re.search(r"<a [^>]*>(?:(?!</a>).)*?<a ", s, flags=re.S):
-            print(f"NESTED LINK in {f}: a link sits inside another link (for example inside a card). Remove the inner one.")
-            problems += 1
-        ids = re.findall(r'\bid="([^"]+)"', s)
-        dup = {i for i in ids if ids.count(i) > 1}
-        if dup:
-            print(f"DUPLICATE ID in {f}: {', '.join(sorted(dup))}")
-            problems += 1
+            base = os.path.dirname(f)
+            if page.base:
+                base = page.base.removeprefix('/ai-for-life/').strip('/')
+            pathname = unquote(url.path)
+            if pathname.startswith('/ai-for-life/'):
+                target = os.path.normpath(pathname[len('/ai-for-life/'):])
+            elif pathname.startswith('/'):
+                errors.append('OUTSIDE SITE ROOT: ' + ref)
+                continue
+            elif not pathname:
+                target = os.path.join(base, 'index.html') if page.base else f
+            else:
+                target = os.path.normpath(os.path.join(base, pathname))
+            if os.path.isdir(target):
+                target = os.path.join(target, 'index.html')
+            if not os.path.isfile(target):
+                errors.append('BROKEN LOCAL REFERENCE: ' + ref)
+            elif url.fragment and target in parsed and unquote(url.fragment) not in parsed[target].ids:
+                errors.append('MISSING FRAGMENT: ' + ref)
+        for error in errors:
+            print(f'{f}: {error}')
+        problems += len(errors)
     print("Checks passed." if not problems else f"{problems} problem(s) found. Fix them before you commit.")
     return problems
 
 
 if __name__ == "__main__":
+    generate_meetings()
     ensure_preview_tags()
     build_sitemap()
     build_index()

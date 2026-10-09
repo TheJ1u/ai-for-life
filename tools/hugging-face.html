@@ -29,7 +29,7 @@
 <h1>Hugging Face</h1>
 <p class="lede">The GitHub of AI: a place to find, test, share and run open models and datasets.</p>
 <p class="meta">By Hugging Face</p>
-<h2>What it is</h2><p>Hugging Face is a website and community where people publish AI models, datasets, and small demo apps called Spaces. It also makes popular open-source libraries such as Transformers. If a company releases open weights, they usually appear on Hugging Face first.</p>
+<p class="note"><a href="#walkthrough">Jump to the full step-by-step walkthrough ↓</a></p><h2>What it is</h2><p>Hugging Face is a website and community where people publish AI models, datasets, and small demo apps called Spaces. It also makes popular open-source libraries such as Transformers. If a company releases open weights, they usually appear on Hugging Face first.</p>
 <h2>Why people use it</h2><ul><li>Free access to thousands of open models for text, images, audio and video.</li><li>You can try a model in the browser before writing any code.</li><li>It is the standard place to publish your own model or dataset, which looks great on a portfolio.</li></ul>
 <h2>How to get started</h2><ol class="steps"><li>Create a free account at huggingface.co.</li><li>Browse Models and filter by task (text generation, text-to-image, speech, and so on).</li><li>Open a model page and read the <strong>model card</strong>: what it does, license, limits.</li><li>Try it in the page widget or a Space. No code needed.</li><li>When ready, run it in Google Colab (free GPU time) or call it through an API.</li></ol>
 <h2>Try this</h2>
@@ -39,11 +39,50 @@ classifier = pipeline(&#x27;sentiment-analysis&#x27;)
 print(classifier(&#x27;Our new Medicare guide helped so many clients!&#x27;))</pre></div>
 <p class="note">Your first code: 3 lines to run a sentiment model. Run it in Google Colab so you install nothing.</p>
 <h2>Why it matters for business and IS</h2><p>Information Systems angle: open models let a startup avoid per-use API costs and keep data in-house, at the price of managing infrastructure.</p>
-<h2>Business use case</h2><div class="usecase"><p><strong>Scenario:</strong> A startup receives hundreds of customer reviews a week and wants to tag each one as positive, negative or a feature request.</p><p><strong>How it works:</strong> Find a text-classification model on Hugging Face, test it on 50 real reviews in the browser or in Google Colab, and run it on the full set. Compare the results with a human check on a sample.</p><p><strong>Measure success by:</strong> Accuracy on a sample you labeled yourself, hours saved, and the cost compared with a paid API.</p><p><strong>Watch out for:</strong> Check the model&#x27;s license before commercial use, and do not upload customer data to a public Space.</p></div><h2>Quick facts</h2><ul><li>Free to use; paid options exist for hosting and enterprise features.</li><li>Key words: Hub, model card, dataset, Space, Transformers, open weights, license.</li><li>Always check the license before using a model commercially.</li></ul>
+<h2 id="walkthrough">Full walkthrough: find, test and run your first model</h2>
+<h3>1. The idea in business terms</h3>
+<p>Think of Hugging Face as an app store plus a library for AI. Instead of paying a company every time you use its AI, you can often download a free "open" model and run it yourself. Your job is to choose the right one and check you are allowed to use it.</p>
+<h3>2. Create your account and look around</h3>
+<ol class="steps">
+<li>Sign up free at huggingface.co and verify your email.</li>
+<li>Click <strong>Models</strong>. On the left are filters for <em>task</em> (what the model does), language and license.</li>
+<li>Choose a task, such as <em>Text Classification</em> or <em>Text-to-Image</em>, and sort by Trending or Most downloads.</li>
+</ol>
+<h3>3. Read a model card like a buyer</h3>
+<p>Open any model and read its <strong>model card</strong> (the main text on the page). Check these five things before you use it:</p>
+<ul>
+<li><strong>What it does</strong> and what it was trained for.</li>
+<li><strong>License</strong>: some are free for any use (such as Apache 2.0 or MIT); some limit commercial use. If you plan to make money, read this first.</li>
+<li><strong>Limits and bias</strong>: the card should say what it is bad at.</li>
+<li><strong>Size</strong>: a large model needs a powerful computer or a paid GPU.</li>
+<li><strong>Popularity and updates</strong>: recent activity and many downloads usually mean it is maintained.</li>
+</ul>
+<h3>4. Try it with no code</h3>
+<p>Many pages have a box on the right where you can type text and see the answer. Others link to a <strong>Space</strong>, a small demo app. Test with 10 examples from your own work, not just the sample.</p>
+<h3>5. Run it in Google Colab (free)</h3>
+<ol class="steps">
+<li>Go to colab.research.google.com and sign in with a Google account. Click <strong>New notebook</strong>.</li>
+<li>In the first cell, install the library by typing <code>!pip install transformers</code> and press Shift+Enter to run it.</li>
+<li>In the next cell, paste the code from the Try this section above and run it.</li>
+<li>The first run downloads the model, so it takes a minute. After that you see the result printed under the cell.</li>
+<li>Change the sentence in the quotes and run again to test your own text.</li>
+</ol>
+<p class="note">If a model is big, choose <strong>Runtime, then Change runtime type</strong> and select a GPU. The free tier has limits.</p>
+<h3>6. Compare and decide</h3>
+<p>Test two or three models on the same 20 examples that you labeled yourself. Count how many each one got right. The cheapest model that is accurate enough usually wins.</p>
+<h3>7. Publish your own work</h3>
+<p>Once you build something (see Build Your Own Model), create a model page, upload it, and write a model card using the same five points above. Link it from your resume and GitHub profile.</p>
+<h3>Common problems</h3>
+<ul>
+<li><strong>"Out of memory":</strong> the model is too big. Choose a smaller version or use a GPU.</li>
+<li><strong>Access denied:</strong> some models require you to accept terms on the model page first.</li>
+<li><strong>Weird answers:</strong> you may be using a model made for a different task. Check the task label.</li>
+<li><strong>Privacy:</strong> do not paste customer data into public Spaces. Run it yourself.</li>
+</ul><h2>Business use case</h2><div class="usecase"><p><strong>Scenario:</strong> A startup receives hundreds of customer reviews a week and wants to tag each one as positive, negative or a feature request.</p><p><strong>How it works:</strong> Find a text-classification model on Hugging Face, test it on 50 real reviews in the browser or in Google Colab, and run it on the full set. Compare the results with a human check on a sample.</p><p><strong>Measure success by:</strong> Accuracy on a sample you labeled yourself, hours saved, and the cost compared with a paid API.</p><p><strong>Watch out for:</strong> Check the model&#x27;s license before commercial use, and do not upload customer data to a public Space.</p></div><h2>Quick facts</h2><ul><li>Free to use; paid options exist for hosting and enterprise features.</li><li>Key words: Hub, model card, dataset, Space, Transformers, open weights, license.</li><li>Always check the license before using a model commercially.</li></ul>
 <h2>What to learn next</h2><p>Follow the free Hugging Face LLM course, then do the 'Build your own model' guide in this repo.</p>
 <div class="btnrow"><a class="btn ghost" href="https://huggingface.co" target="_blank" rel="noopener">Hugging Face ↗</a><a class="btn ghost" href="https://huggingface.co/learn" target="_blank" rel="noopener">Free Hugging Face courses ↗</a></div>
 </main>
-<footer><p class="foot-links"><a href="#" data-install-link>Install the app</a> · <a href="../roadmap.html">Roadmap</a> · <a href="../board.html">Board</a> · <a href="../contributors.html">Contributors</a> · <a href="../share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
+<footer><p class="foot-links"><a href="#" data-install-link>Install the app</a> · <a href="../roadmap.html">Roadmap</a> · <a href="../industries.html">By industry</a> · <a href="../automate.html">News watch</a> · <a href="../board.html">Board</a> · <a href="../contributors.html">Contributors</a> · <a href="../share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
 <script src="../script.js"></script>
 </body>
 </html>

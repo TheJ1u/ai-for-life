@@ -29,7 +29,7 @@
 <h1>Build Your Own Model</h1>
 <p class="lede">A beginner path from using AI tools to training and publishing a small model of your own.</p>
 <p class="meta">By Club guide</p>
-<h2>What it is</h2><p>You do not need to train a giant model from scratch (that costs millions). The realistic path is to <strong>fine-tune</strong> an existing open model on your own data, or to build a small classic machine-learning model for a business problem. This page shows the ladder from easiest to hardest.</p>
+<p class="note"><a href="#walkthrough">Jump to the full step-by-step walkthrough ↓</a></p><h2>What it is</h2><p>You do not need to train a giant model from scratch (that costs millions). The realistic path is to <strong>fine-tune</strong> an existing open model on your own data, or to build a small classic machine-learning model for a business problem. This page shows the ladder from easiest to hardest.</p>
 <h2>Why people use it</h2><ul><li>Shows employers you understand how AI works, not just how to use it.</li><li>A model trained on your data can beat a general tool for a narrow task.</li><li>Great portfolio project for Information Systems, analytics and startups.</li></ul>
 <h2>How to get started</h2><ol class="steps"><li><strong>Level 1, use:</strong> run an existing model on Hugging Face (3-line pipeline).</li><li><strong>Level 2, prompt:</strong> give a model examples and instructions (no training).</li><li><strong>Level 3, fine-tune:</strong> adapt an open model with your own examples. LoRA is a cheap way to do this.</li><li><strong>Level 4, classic ML:</strong> train a small model with scikit-learn on a spreadsheet (for example, predicting which leads convert).</li><li><strong>Publish:</strong> upload your model and a model card to Hugging Face and link it in your portfolio.</li></ol>
 <h2>Try this</h2>
@@ -40,11 +40,68 @@ model = LogisticRegression().fit(X, y)
 print(model.predict_proba(new_lead))</pre></div>
 <p class="note">Idea: predict which leads become clients from a simple spreadsheet. Run it in Google Colab.</p>
 <h2>Why it matters for business and IS</h2><p>Data comes first. Clean, labeled data is usually the hard part and the real asset. Never train on private client data without permission.</p>
-<h2>Business use case</h2><div class="usecase"><p><strong>Scenario:</strong> A business gets support emails about billing, shipping and returns, and a person spends hours each week sorting them.</p><p><strong>How it works:</strong> Collect a few hundred labeled examples, fine-tune a small model on them, test it on emails it has not seen, and use it to suggest a category that a person confirms.</p><p><strong>Measure success by:</strong> How often the suggested category is right, and the hours of sorting saved each week.</p><p><strong>Watch out for:</strong> Start small and keep a human in the loop. Remove private information from your training data, and re-test as the kind of emails you receive changes.</p></div><h2>Quick facts</h2><ul><li>Free tools: Google Colab, Hugging Face, scikit-learn, Kaggle datasets.</li><li>Fine-tuning needs a GPU; Colab's free tier can handle small experiments.</li><li>Measure results with held-out test data, not the data you trained on.</li></ul>
+<h2 id="walkthrough">Full walkthrough: train your first model in about an hour</h2>
+<h3>1. The idea in business terms</h3>
+<p>A model is a pattern-finder. You show it many past examples with the right answers (for example, leads and whether they became clients). It learns what separates the groups, then predicts new cases. The quality of your data matters more than the fancy part.</p>
+<h3>2. Pick a small, real question</h3>
+<p>Good beginner questions have a yes/no or category answer and data you can put in a spreadsheet:</p>
+<ul>
+<li>Will this lead become a client?</li>
+<li>Is this review positive or negative?</li>
+<li>Which category does this support email belong to?</li>
+</ul>
+<h3>3. Build a tiny dataset</h3>
+<ol class="steps">
+<li>Open Google Sheets. Make columns for what you know (such as calls made, emails opened) and one final column with the answer (1 for yes, 0 for no).</li>
+<li>Use at least 50 to 100 rows. More is better. Use public data or made-up practice data, not private client records. Kaggle has free practice datasets.</li>
+<li>Download it as a CSV file and name it <code>leads.csv</code>.</li>
+</ol>
+<h3>4. Train and test in Google Colab</h3>
+<p>Open colab.research.google.com, create a notebook, upload your CSV with the folder icon, and run this:</p>
+<div class="code"><button class="copy" data-copy>Copy</button><pre>import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+df = pd.read_csv(&quot;leads.csv&quot;)
+X = df[[&quot;calls_made&quot;, &quot;emails_opened&quot;]]   # the clues
+y = df[&quot;converted&quot;]                        # the answer (1 or 0)
+
+# Hold back 20% of rows to test on data the model has not seen
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = LogisticRegression().fit(X_train, y_train)
+print(&quot;Accuracy on unseen data:&quot;, model.score(X_test, y_test))</pre></div>
+<p>Change the column names to match your file. The most important line is the split: you must test on rows the model never saw, or the score is meaningless.</p>
+<h3>5. Judge the result honestly</h3>
+<ul>
+<li>Compare the accuracy to a simple guess. If 90% of leads do not convert, a model that always says "no" is 90% accurate and useless.</li>
+<li>Look at the mistakes. What do the wrong predictions have in common?</li>
+<li>Ask what a wrong answer would cost in real life.</li>
+</ul>
+<h3>6. Level up when ready</h3>
+<ul>
+<li><strong>Prompting (no training):</strong> give an AI examples in the prompt. Try this first for text tasks.</li>
+<li><strong>Fine-tuning:</strong> teach an open model from Hugging Face with a few hundred examples, often using a method called LoRA to keep it cheap.</li>
+<li><strong>Keep a human in the loop:</strong> let the model suggest and a person confirm.</li>
+</ul>
+<h3>7. Publish it</h3>
+<ol class="steps">
+<li>Save your notebook to GitHub (in Colab: File, then Save a copy in GitHub).</li>
+<li>Write a short README: the question, the data source, the accuracy, and the limits.</li>
+<li>Optionally upload the model to Hugging Face with a model card.</li>
+<li>Link both on your resume.</li>
+</ol>
+<h3>Common problems</h3>
+<ul>
+<li><strong>KeyError on a column name:</strong> the name in your code does not match the CSV header exactly, including capitals and spaces.</li>
+<li><strong>Accuracy looks too perfect:</strong> your answer column may be leaking into the clues, or your dataset is tiny.</li>
+<li><strong>Error about missing values:</strong> fill or remove blank cells first.</li>
+<li><strong>Privacy:</strong> never train on real client data without permission.</li>
+</ul><h2>Business use case</h2><div class="usecase"><p><strong>Scenario:</strong> A business gets support emails about billing, shipping and returns, and a person spends hours each week sorting them.</p><p><strong>How it works:</strong> Collect a few hundred labeled examples, fine-tune a small model on them, test it on emails it has not seen, and use it to suggest a category that a person confirms.</p><p><strong>Measure success by:</strong> How often the suggested category is right, and the hours of sorting saved each week.</p><p><strong>Watch out for:</strong> Start small and keep a human in the loop. Remove private information from your training data, and re-test as the kind of emails you receive changes.</p></div><h2>Quick facts</h2><ul><li>Free tools: Google Colab, Hugging Face, scikit-learn, Kaggle datasets.</li><li>Fine-tuning needs a GPU; Colab's free tier can handle small experiments.</li><li>Measure results with held-out test data, not the data you trained on.</li></ul>
 <h2>What to learn next</h2><p>Complete Kaggle's free 'Intro to Machine Learning', then replicate it with your own small dataset.</p>
 <div class="btnrow"><a class="btn ghost" href="https://colab.research.google.com" target="_blank" rel="noopener">Google Colab ↗</a><a class="btn ghost" href="https://www.kaggle.com/learn" target="_blank" rel="noopener">Kaggle Learn ↗</a><a class="btn ghost" href="https://huggingface.co/learn" target="_blank" rel="noopener">Hugging Face Learn ↗</a></div>
 </main>
-<footer><p class="foot-links"><a href="#" data-install-link>Install the app</a> · <a href="../roadmap.html">Roadmap</a> · <a href="../board.html">Board</a> · <a href="../contributors.html">Contributors</a> · <a href="../share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
+<footer><p class="foot-links"><a href="#" data-install-link>Install the app</a> · <a href="../roadmap.html">Roadmap</a> · <a href="../industries.html">By industry</a> · <a href="../automate.html">News watch</a> · <a href="../board.html">Board</a> · <a href="../contributors.html">Contributors</a> · <a href="../share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
 <script src="../script.js"></script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+# Never upload secrets or junk
+.env
+.env.*
+*.key
+*.pem
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+node_modules/
+.vscode/
+.idea/

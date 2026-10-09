@@ -36,6 +36,7 @@ Not ready to edit? [Open an issue](https://github.com/TheJ1u/ai-for-life/issues/
 1. Copy `templates/tool-template.html` to `tools/your-tool.html`.
 2. Fill in every section. Delete nothing, so all guides read the same way.
 3. Add a card to the right group on the home page (`index.html`). Groups are Marketing and ad videos, 3D and design, Learning and building models, Data analytics, Writing and productivity, and Code and teamwork. Copy an existing `<a class="card">`, and fill in its **Business use** line.
+3a. Add a **Full walkthrough** section (`<h2 id="walkthrough">`): numbered beginner steps, what to check, and common problems.
 3b. Fill in the **Business use case** section on your guide with a realistic scenario, how it works, how to measure success, and what to watch out for.
 4. In your pull request, say which official pages you checked.
 

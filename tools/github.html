@@ -29,7 +29,7 @@
 <h1>GitHub</h1>
 <p class="lede">Google Docs for code: a free place to store projects, track every change, and work on them with other people. It can also turn a project into a live website.</p>
 <p class="meta">By GitHub (owned by Microsoft)</p>
-<h2>What it is</h2><p>GitHub is a website built on <strong>Git</strong>, a tool that saves every version of your files. A project lives in a <strong>repository</strong> (repo), which is just a folder with a full history. You can see who changed what and go back to any earlier version. This club site is a GitHub repo, and its website is hosted by GitHub too.</p>
+<p class="note"><a href="#walkthrough">Jump to the full step-by-step walkthrough ↓</a></p><h2>What it is</h2><p>GitHub is a website built on <strong>Git</strong>, a tool that saves every version of your files. A project lives in a <strong>repository</strong> (repo), which is just a folder with a full history. You can see who changed what and go back to any earlier version. This club site is a GitHub repo, and its website is hosted by GitHub too.</p>
 <h2>Why people use it</h2><ul><li>Nearly every software team and AI project, including most open models, keeps its work on GitHub.</li><li>Teams review each other's work before it goes live, which prevents costly mistakes.</li><li><strong>GitHub Pages</strong> hosts a website from a repo for free, with no server to manage.</li><li>A public GitHub profile works as a portfolio that employers and investors can check.</li></ul>
 <h2>How to get started</h2><ol class="steps"><li>Create a free account at github.com.</li><li>Open this club's repo (TheJ1u/ai-for-life) and click around. Every file is readable.</li><li>Click <strong>Fork</strong> to make your own copy. You cannot break the original.</li><li>Open a file, click the pencil icon, make a change, and <strong>Commit</strong> it. A commit is a saved version with a note.</li><li>Click <strong>Contribute, then Open pull request</strong> to suggest your change to the club repo. The owner reviews it and clicks <strong>Merge</strong> if it looks good.</li></ol>
 <h2>Try this</h2>
@@ -40,11 +40,132 @@ git commit -m &quot;Describe what you changed&quot;
 git push</pre></div>
 <p class="note">These are the commands for working on your own computer. To start, skip them: you can do everything above in the browser. Learn the commands once you have made a few changes on the website.</p>
 <h2>Why it matters for business and IS</h2><p>Information Systems angle: GitHub is how organizations control change. Every edit is recorded, reviewed and reversible, which supports audits, teamwork and quality. For a startup it also means a website or product can launch with almost no hosting cost.</p>
-<h2>Business use case</h2><div class="usecase"><p><strong>Scenario:</strong> A student team or startup needs a simple landing page and wants everyone to be able to edit it without breaking the live site.</p><p><strong>How it works:</strong> Put the site in a repo, publish it with GitHub Pages, and have teammates propose edits as pull requests. The owner reviews each one before it goes live.</p><p><strong>Measure success by:</strong> Hosting cost (zero), time to publish a change, and fewer mistakes reaching the live site.</p><p><strong>Watch out for:</strong> Never commit passwords, API keys or private customer data. A public repo is readable by anyone.</p></div><h2>Quick facts</h2><ul><li>Free for individuals, including public repos and GitHub Pages. Paid plans exist for teams and extra features.</li><li>Key words: repo, commit, branch, fork, pull request, merge, GitHub Pages.</li><li>Never put passwords or API keys in a public repo. Anyone can read them.</li></ul>
+<h2 id="walkthrough">Full walkthrough: from zero to your first merged change</h2>
+<p>Read this top to bottom once, then keep it open while you do the steps. Every step can be done in your web browser. You do not need to install anything or know how to code.</p>
+
+<h3>1. The idea in business terms</h3>
+<p>Imagine a shared Google Doc where every edit is saved with a name, a date and a note, nothing is ever lost, and a manager must approve changes before they go public. That is GitHub. The words are different, but the ideas match:</p>
+<ul>
+<li><strong>Repository (repo)</strong>: the project folder. Ours is TheJ1u/ai-for-life.</li>
+<li><strong>Commit</strong>: one saved version, with a short note about what changed.</li>
+<li><strong>Branch</strong>: a side copy where you try changes without touching the main version.</li>
+<li><strong>Fork</strong>: your own copy of someone else's repo, in your account.</li>
+<li><strong>Pull request (PR)</strong>: a request that says "please add my changes to the main version." This is the approval step.</li>
+<li><strong>Merge</strong>: the owner accepts the request and the change goes live.</li>
+</ul>
+<p class="note">Information Systems link: this is called <strong>change management</strong>. Companies need to know who changed what, why, and whether someone approved it. GitHub builds that into the tool.</p>
+
+<h3>2. Set up your account (10 minutes)</h3>
+<ol class="steps">
+<li>Go to github.com and choose <strong>Sign up</strong>. Use an email you check.</li>
+<li><strong>Pick your username carefully.</strong> It appears in every link and on your resume, like github.com/yourname. Use something professional, such as your name. Changing it later is possible but breaks old links.</li>
+<li>Verify your email when GitHub sends the message.</li>
+<li>Turn on <strong>two-factor authentication</strong> in your account settings (look for Password and authentication). This protects your account and your public profile if someone steals your password.</li>
+<li>Optional but smart: add a profile photo and a one-line bio. Employers do look.</li>
+</ol>
+
+<h3>3. Take a tour of a repo page</h3>
+<p>Open github.com/TheJ1u/ai-for-life and look at these parts:</p>
+<ul>
+<li><strong>File list</strong>: every file and folder. Click any file to read it.</li>
+<li><strong>README</strong>: the welcome text shown under the file list. Good projects explain themselves here.</li>
+<li><strong>Commits</strong> (a clock icon with a number): the full history. Click one to see exactly what changed, with red for removed and green for added.</li>
+<li><strong>Issues tab</strong>: a to-do and idea list. Anyone can open an issue to suggest something.</li>
+<li><strong>Pull requests tab</strong>: proposed changes waiting for review, and the history of accepted ones.</li>
+<li><strong>Settings tab</strong>: only the owner sees it. That is where the website (GitHub Pages) is turned on.</li>
+</ul>
+
+<h3>4. Make your first change without breaking anything</h3>
+<p>You cannot damage the club repo. You are not editing it; you are proposing a change to it.</p>
+<ol class="steps">
+<li>Sign in. Open the repo and click a file you want to improve, for example <code>glossary.html</code> or <code>CONTRIBUTING.md</code>.</li>
+<li>Click the <strong>pencil icon</strong> (Edit this file). Because you are not the owner, GitHub will offer to <strong>fork</strong> the repo for you. Accept. It makes your own copy automatically.</li>
+<li>Make a small change. Fix a typo, add one sentence, or add your name to the Contributors table.</li>
+<li>Click <strong>Commit changes</strong> (or <strong>Propose changes</strong>). Write a short message that says what you did, like <em>Add Muse tool guide</em>. Good messages start with a verb and are under about 70 characters.</li>
+<li>GitHub then shows <strong>Create pull request</strong>. Click it. In the box, explain in one or two sentences what you changed and why. Click <strong>Create pull request</strong> again.</li>
+<li>Done. You will get an email when the owner comments or merges. Your change goes live on the website a minute or two after it is merged.</li>
+</ol>
+<p class="note">If the owner asks for a fix, edit the same file on your fork again and commit. The pull request updates itself. You do not need to start over.</p>
+
+<h3>5. What to write in a pull request</h3>
+<p>A clear request gets merged faster. Use this pattern:</p>
+<div class="code"><button class="copy" data-copy>Copy</button><pre>What I changed: Added a guide for Muse and linked it on the home page.
+Why: We talked about it at the Thursday meeting and it was not on the site.
+How I checked it: Opened the page, clicked every link, ran scripts/update_site.py.</pre></div>
+
+<h3>6. Undo a mistake</h3>
+<p>This is the part that makes GitHub safe. Nothing is ever really lost.</p>
+<ul>
+<li><strong>Before it is merged:</strong> just close the pull request, or keep editing it.</li>
+<li><strong>After it is merged:</strong> open the merged pull request and click <strong>Revert</strong>. GitHub makes a new pull request that undoes it. The owner merges that, and the site goes back.</li>
+<li><strong>To see an old version:</strong> open a file, click <strong>History</strong>, and click any earlier version.</li>
+</ul>
+
+<h3>7. Use branches (when you are ready)</h3>
+<p>A branch is a safe lane for one piece of work. If you have write access to a repo, open the branch dropdown (it says <em>main</em>), type a new name like <code>add-muse-guide</code>, and choose <strong>Create branch</strong>. Your commits go to that branch only. When it is ready, open a pull request from the branch into <em>main</em>. Teams use one branch per task so unfinished work never reaches the live site.</p>
+
+<h3>8. Start your own repo and publish a free website</h3>
+<ol class="steps">
+<li>Click the <strong>+</strong> at the top right, then <strong>New repository</strong>. Name it something short with no spaces, like <code>my-portfolio</code>. Choose <strong>Public</strong> and tick <strong>Add a README</strong>.</li>
+<li>Click <strong>Add file, then Create new file</strong>. Name it <code>index.html</code>. Paste a few lines of HTML (ask Claude: "write a simple one-page personal site in a single HTML file"). Commit.</li>
+<li>Go to <strong>Settings, then Pages</strong>. Under <em>Build and deployment</em>, choose <strong>Deploy from a branch</strong>, pick <strong>main</strong> and <strong>/ (root)</strong>, and click Save.</li>
+<li>Wait one to two minutes and refresh. GitHub shows the address: <code>https://YOUR-USERNAME.github.io/my-portfolio/</code>.</li>
+<li>Every future commit updates the site automatically.</li>
+</ol>
+
+<h3>9. Issues: the club's idea box</h3>
+<p>Not ready to change a file? Open the <strong>Issues</strong> tab, click <strong>New issue</strong>, write a title and a few sentences ("Add a guide for Google AI Studio"), and submit. Anyone can then pick it up. In a company, issues are the task list.</p>
+
+<h3>10. Working on your own computer (do this second, not first)</h3>
+<p>The browser is enough to start. When you make many changes, the desktop way is faster.</p>
+<ul>
+<li><strong>Easiest:</strong> install <strong>GitHub Desktop</strong> (free, from desktop.github.com). Sign in, choose <em>Clone a repository</em>, edit files in any editor, then use <em>Commit</em> and <em>Push origin</em> buttons.</li>
+<li><strong>Commands:</strong> the same thing with text commands in a terminal:</li>
+</ul>
+<div class="code"><button class="copy" data-copy>Copy</button><pre>git clone https://github.com/YOUR-USERNAME/ai-for-life.git   # download your fork
+cd ai-for-life
+git pull                                  # get the newest version first
+git status                                # what did I change?
+git add .                                 # choose all my changes
+git commit -m &quot;Add Muse tool guide&quot;       # save a version with a note
+git push                                  # send it to GitHub</pre></div>
+<p class="note">Always <code>git pull</code> before you start. It prevents most conflicts.</p>
+
+<h3>11. Use AI to help, safely</h3>
+<p>This repo has a <code>CLAUDE.md</code> file with instructions for AI assistants. If you open the repo in Claude Code or paste the repo link and the file into Claude, it follows the club's rules (format, no invented facts, run the update script). You are still responsible for what you submit, so read the change before you commit it.</p>
+
+<h3>12. Keep secrets out</h3>
+<ul>
+<li>Never commit passwords, API keys, tokens, client names, or Medicare details. A public repo can be read by anyone and by bots that scan for keys.</li>
+<li>If you commit a secret by mistake, deleting it is not enough because it stays in the history. <strong>Revoke or change the key right away</strong>, then tell the owner.</li>
+<li>Use a <code>.gitignore</code> file to list files that should never be uploaded, such as <code>.env</code>.</li>
+</ul>
+
+<h3>13. When something goes wrong</h3>
+<ul>
+<li><strong>"This branch is out of date":</strong> the main repo changed while you worked. On your fork's page click <strong>Sync fork</strong>, then try again.</li>
+<li><strong>Merge conflict:</strong> two people edited the same line. GitHub shows both versions. Keep the correct text, delete the markers (lines with &lt;&lt;&lt;&lt;, ====, &gt;&gt;&gt;&gt;), and commit. Ask in the club chat if unsure.</li>
+<li><strong>My change is not on the website:</strong> wait two minutes, then hard refresh (or open in a private window). The browser may be showing an old copy.</li>
+<li><strong>No pencil icon:</strong> you are probably not signed in.</li>
+<li><strong>Push rejected:</strong> run <code>git pull</code> first, then push again.</li>
+</ul>
+
+<h3>14. Your practice ladder</h3>
+<ol class="steps">
+<li>Create your account and turn on two-factor authentication.</li>
+<li>Add your name to the Contributors table through a pull request.</li>
+<li>Add one new term to the glossary.</li>
+<li>Open an issue with an idea for the site.</li>
+<li>Create your own repo and publish a one-page site with GitHub Pages.</li>
+<li>Install GitHub Desktop and make a change from your computer.</li>
+</ol>
+
+<h3>15. Why this helps your resume</h3>
+<p>Each merged pull request is public, dated proof that you contributed to a real project. Link to your pull requests from your resume and from the Contributors page. Pin your best repo on your GitHub profile so it is the first thing a recruiter sees.</p><h2>Business use case</h2><div class="usecase"><p><strong>Scenario:</strong> A student team or startup needs a simple landing page and wants everyone to be able to edit it without breaking the live site.</p><p><strong>How it works:</strong> Put the site in a repo, publish it with GitHub Pages, and have teammates propose edits as pull requests. The owner reviews each one before it goes live.</p><p><strong>Measure success by:</strong> Hosting cost (zero), time to publish a change, and fewer mistakes reaching the live site.</p><p><strong>Watch out for:</strong> Never commit passwords, API keys or private customer data. A public repo is readable by anyone.</p></div><h2>Quick facts</h2><ul><li><strong>Students:</strong> verified students can get GitHub Pro and free Copilot through the Student Developer Pack. See <a href="../student-perks.html">student plans</a>.</li><li>Free for individuals, including public repos and GitHub Pages. Paid plans exist for teams and extra features.</li><li>Key words: repo, commit, branch, fork, pull request, merge, GitHub Pages.</li><li>Never put passwords or API keys in a public repo. Anyone can read them.</li></ul>
 <h2>What to learn next</h2><p>Make one small edit to this repo and open a pull request. Then learn <strong>git add, commit and push</strong> on your computer, and try the 'Build your own model' guide, which also uses GitHub.</p>
 <div class="btnrow"><a class="btn ghost" href="https://github.com" target="_blank" rel="noopener">GitHub ↗</a><a class="btn ghost" href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">This club's repo ↗</a><a class="btn ghost" href="https://docs.github.com/en/get-started/start-your-journey/hello-world" target="_blank" rel="noopener">Official Hello World guide ↗</a></div>
 </main>
-<footer><p class="foot-links"><a href="#" data-install-link>Install the app</a> · <a href="../roadmap.html">Roadmap</a> · <a href="../board.html">Board</a> · <a href="../contributors.html">Contributors</a> · <a href="../share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
+<footer><p class="foot-links"><a href="#" data-install-link>Install the app</a> · <a href="../roadmap.html">Roadmap</a> · <a href="../industries.html">By industry</a> · <a href="../automate.html">News watch</a> · <a href="../board.html">Board</a> · <a href="../contributors.html">Contributors</a> · <a href="../share.html">Share or install</a> · <a href="https://github.com/TheJ1u/ai-for-life" target="_blank" rel="noopener">Source on GitHub</a></p><p>AI For Life club notes. Tools change fast, so check each official site for current pricing and features. Last updated October 2026.</p></footer>
 <script src="../script.js"></script>
 </body>
 </html>

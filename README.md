@@ -1,5 +1,40 @@
 # AI For Life
 
+[![Live site](https://img.shields.io/badge/live%20site-open-6ee7b7)](https://thej1u.github.io/ai-for-life/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](CONTRIBUTING.md)
+
+[![AI For Life preview](assets/og-image.png)](https://thej1u.github.io/ai-for-life/)
+
+**Open the website: https://thej1u.github.io/ai-for-life/** (no account or install needed).
+
+A student-run club guide to practical AI: tool walkthroughs with business use cases, a searchable glossary, prompts, a meeting log, and a place for everyone to contribute. Built for people who are new to AI, code, or both. We meet every Thursday, 4:00 to 5:00 PM Mountain, at BYU.
+
+## What is inside
+
+- **Tool guides with full walkthroughs:** FLUX 3, Higgsfield, CapCut, Google AI Edge Eloquent, Hugging Face, GitHub, Muse, and building your own model.
+- **Scheduled news watch:** make AI check the news for you.
+- **AI by industry:** IT/IS, analysis, marketing, finance, accounting, construction, insurance and more.
+- **Safe AI checklist, cost calculator, roadmap board.**
+- **Glossary of 150+ terms,** from API to UX to backend and frontend.
+- **Contributors page:** a verifiable way to put your contribution on a resume.
+
+## Contribute in 5 minutes
+
+1. Open any file on GitHub and click the pencil icon.
+2. Make a small change and commit it.
+3. Click **Create pull request**.
+
+Full steps are in [CONTRIBUTING.md](CONTRIBUTING.md). Using an AI assistant? Point it at [CLAUDE.md](CLAUDE.md).
+
+## License
+
+Code and text: [MIT](LICENSE). The header video and some images were made or shared by club members, who keep credit for their work (see the Contributors page). See also the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+---
+
+## Details for developers
+
 A beginner-friendly guide to the AI tools we talk about in the **AI For Life** club, plus a glossary of the tech and business words you will hear.
 
 **Live site:** https://thej1u.github.io/ai-for-life/ (no account or install needed, just open the link).
@@ -16,6 +51,8 @@ A beginner-friendly guide to the AI tools we talk about in the **AI For Life** c
 | `tools/google-ai-edge-eloquent.html` | Google AI Edge Eloquent (free dictation app) |
 | `tools/hugging-face.html` | Hugging Face (open model hub) |
 | `tools/github.html` | GitHub (store, share and publish projects) |
+| `tools/muse.html` | Muse (Meta's personal AI agent) |
+| `automate.html` | Scheduled news watch (automation) |
 | `start.html` | Start here: what the club is, how to join in, FAQ |
 | `meetings.html` | Weekly meeting time, calendar invite and meeting log |
 | `prompts.html` | Copy-and-paste prompt library |

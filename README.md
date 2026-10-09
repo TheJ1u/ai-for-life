@@ -15,6 +15,7 @@ A beginner-friendly guide to the AI tools we talk about in the **AI For Life** c
 | `tools/higgsfield.html` | Higgsfield (multi-model AI video studio) |
 | `tools/google-ai-edge-eloquent.html` | Google AI Edge Eloquent (free dictation app) |
 | `tools/hugging-face.html` | Hugging Face (open model hub) |
+| `tools/github.html` | GitHub (store, share and publish projects) |
 | `tools/capcut.html` | CapCut (video editing) |
 | `tools/build-your-own-model.html` | A path to fine-tuning and publishing your own model |
 | `glossary.html` | Searchable notes: API, CLI, MCP, CEO, CIO, CCO and more |

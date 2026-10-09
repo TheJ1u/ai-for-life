@@ -123,3 +123,8 @@ label.inline input{display:inline-block;width:auto;min-width:240px;margin-left:8
 .chips.static .chip{cursor:default}
 
 .demo{margin:8px 0 18px}.demo video{width:100%;border-radius:12px;border:1px solid var(--line);background:#000;display:block}.demo figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+/* mobile search: keep results on screen */
+@media (max-width:700px){
+.search-wrap{flex:1 1 100%;max-width:none;min-width:0}
+.results{left:0;right:0;width:auto;max-width:100%}
+}

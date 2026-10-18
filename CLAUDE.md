@@ -37,6 +37,7 @@ A plain **static website**: HTML, CSS and a little JavaScript. There is no build
 | `tools/*.html` | One guide per tool |
 | `templates/tool-template.html` | Copy this to start a new tool guide |
 | `style.css`, `script.js`, `sw.js` | Styles, behavior, offline support |
+| Visit counting | GoatCounter, switched on by the `GOATCOUNTER` line at the top of `script.js`. Explained to visitors in the `start.html` FAQ. Never add another tracker |
 | `search-index.json` | **Generated.** Never edit by hand. Run `scripts/update_site.py` |
 | `assets/` | Images, video, icons, QR code, calendar file |
 

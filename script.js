@@ -208,7 +208,7 @@ if(u&&vo)u.addEventListener('input',function(){
 });
 })();
 
-/* ---- showcase filter: buttons are built from each project's tool tags ---- */
+/* ---- showcase filter: buttons are built from each project's kind tags ---- */
 (function(){
 var grid=document.getElementById('projects'),bar=document.getElementById('pfilter'),count=document.getElementById('pcount');if(!grid||!bar)return;
 var cards=[].slice.call(grid.querySelectorAll('.project')),tags=[];

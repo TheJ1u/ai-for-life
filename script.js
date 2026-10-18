@@ -1,3 +1,14 @@
+/* ---- visit counting (GoatCounter: free for non-commercial sites, no cookies) ----
+   Off until GOATCOUNTER is set to the site code from goatcounter.com, e.g. 'aiforlife'.
+   GoatCounter skips visits from localhost, so testing on your own computer is not counted. */
+var GOATCOUNTER='';
+(function(){
+if(!/^[a-z0-9-]+$/.test(GOATCOUNTER))return;
+var s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';
+s.setAttribute('data-goatcounter','https://'+GOATCOUNTER+'.goatcounter.com/count');
+document.head.appendChild(s);
+})();
+
 document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
 var t=b.parentElement.querySelector('pre').innerText;
 (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)}).catch(function(){b.textContent='Select + copy'});});});

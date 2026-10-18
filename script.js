@@ -207,3 +207,18 @@ if(u&&vo)u.addEventListener('input',function(){
   var li=document.createElement('li'),a=document.createElement('a');a.href=x[1];a.target='_blank';a.rel='noopener';a.textContent=x[0]+' ↗';li.appendChild(a);vo.appendChild(li);});
 });
 })();
+
+/* ---- showcase filter: buttons are built from each project's tool tags ---- */
+(function(){
+var grid=document.getElementById('projects'),bar=document.getElementById('pfilter'),count=document.getElementById('pcount');if(!grid||!bar)return;
+var cards=[].slice.call(grid.querySelectorAll('.project')),tags=[];
+function tagsOf(c){return [].map.call(c.querySelectorAll('.pills span'),function(x){return x.textContent.trim()});}
+cards.forEach(function(c){tagsOf(c).forEach(function(t){if(tags.indexOf(t)<0)tags.push(t)})});
+function show(t){var n=0;cards.forEach(function(c){var ok=t==='all'||tagsOf(c).indexOf(t)>-1;c.hidden=!ok;if(ok)n++;});
+ count.textContent=n+(n===1?' project':' projects');}
+['all'].concat(tags).forEach(function(t,i){var b=document.createElement('button');b.type='button';b.className='chip'+(i?'':' on');
+ b.textContent=i?t:'All';b.setAttribute('data-t',t);bar.appendChild(b);});
+bar.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;
+ bar.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on')});b.classList.add('on');show(b.getAttribute('data-t'));});
+bar.hidden=false;show('all');
+})();
